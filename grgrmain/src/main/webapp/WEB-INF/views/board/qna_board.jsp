@@ -36,10 +36,11 @@
 }
 </style>
 </head>
+
+<body>
 <!-- 헤더 -->
 <jsp:include page="/WEB-INF/views/tiles/header.jsp"/>
 
-<body>
 	<div id="preloader">
 		<div class="preloader">
 			<span></span> <span></span>
