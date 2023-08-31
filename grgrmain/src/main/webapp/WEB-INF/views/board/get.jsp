@@ -46,6 +46,17 @@
 </head>
 
 <body>
+<!-- 헤더 -->
+	<jsp:include page="/WEB-INF/views/tiles/header.jsp" />
+	<!-- 배너 -->
+	<c:set var="boardName" value="판매게시판" />
+	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/market.jpg); background-size: cover;">
+		<div class="container text-center">
+			<h1 class="page-title">Free</h1>
+			<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
+		</div>
+		<!-- / container -->
+	</header>
 
 	<div id="preloader">
 		<div class="preloader">
@@ -55,10 +66,7 @@
 
 	<div id="top"></div>
 	<!-- / top -->
-	<jsp:include page="/WEB-INF/views/tiles/header.jsp" />
-	<header class="xxl pb-30 bg-img bg-fixed"
-		style="background-image: url(${pageContext.request.contextPath}/assets/images/placeholder.jpg)">
-		
+	
 		<div class="container relative z-index-1">
 			<h1 class="page-title text-left mb-15">상품 조회</h1>
 			<nav class="breadcrumb relative z-index-1 pt-10 pl-5">
@@ -68,7 +76,6 @@
 			</nav>
 		</div>
 		<!-- / container -->
-	</header>
 
 	<section class="big page-section">
 		<div class="container">

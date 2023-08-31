@@ -59,10 +59,10 @@
 }
 </style>
 <body>
-<!-- 헤더 -->
-   <jsp:include page="/WEB-INF/views/tiles/header.jsp"/>
-   <!-- 배너 -->
-   <c:set var="boardName" value="공지게시판" />
+	<!-- 헤더 -->
+	<jsp:include page="/WEB-INF/views/tiles/header.jsp"/>
+	<!-- 배너 -->
+	<c:set var="boardName" value="공지게시판" />
    <header class="xl bg-img bg-fixed" style="height: 300px; padding-top: 200px;">
       <div class="container text-center">
          <h1 class="page-title">Notice</h1>
@@ -70,7 +70,14 @@
       </div>
       <!-- / container -->
    </header>
-   <div id="top"></div>
+
+	<div id="preloader">
+		<div class="preloader">
+			<span></span> <span></span>
+		</div>
+	</div>
+
+	<div id="top"></div>
 	<!-- / top -->
 
 

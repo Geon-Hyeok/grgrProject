@@ -37,6 +37,13 @@
       </div>
       <!-- / container -->
    </header>
+
+	<div id="preloader">
+		<div class="preloader">
+			<span></span> <span></span>
+		</div>
+	</div>
+
 	<div id="top"></div>
 	<!-- / top -->
 
@@ -45,8 +52,8 @@
 		<div class="container">
 			<h2 class="hidden">Qna Board List</h2>
 			<!-- 키워드 -->
-			<ul class="portfolio-filter list-inline text-center mb-30"> 
-				<li><a href="<c:url value="/qnaoard/list"/>" class="btn btn-outline-primary m-y-10 mr-10" >전체</a></li>
+			<ul class="list-inline text-center mb-30" >
+				<li><a href="<c:url value="/qnaboard/list"/>" class="btn btn-outline-primary m-y-10 mr-10" >전체</a></li>
 				<li id="keyword-button"><a href="<c:url value="/qnaboard/list?keyword=member"/>" class="btn btn-outline-primary m-y-10 mr-10" >일반회원</a>
 				</li>
 				<li id="keyword-button"><a href="<c:url value="/qnaboard/list?keyword=trade"/>" class="btn btn-outline-primary m-y-10 mr-10" >상권회원</a>
