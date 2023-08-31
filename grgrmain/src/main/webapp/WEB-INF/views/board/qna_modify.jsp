@@ -3,10 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="kor">
-
-<!-- 헤더 연결 -->
-<%@ include file="/WEB-INF/views/tiles/header.jsp"%>
-
 <style>
 .va-middle {
 	font-size: 20px;
@@ -32,14 +28,8 @@
          <p class="w-50 m-x-auto mb-30"><c:out value="${boardName}" /></p>
       </div>
       <!-- / container -->
-   </header>include page="/WEB-INF/views/tiles/header.jsp"/>
-	<div id="preloader">
-		<div class="preloader">
-			<span></span> <span></span>
-		</div>
-	</div>
-
-	<div id="top"></div>
+   </header>
+   <div id="top"></div>
 	<!-- / top -->
 	<script type="text/javascript">
 		

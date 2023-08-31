@@ -26,7 +26,7 @@
 }
 </style>
 <body>
-<<!-- 헤더 -->
+<!-- 헤더 -->
    <jsp:include page="/WEB-INF/views/tiles/header.jsp"/>
    <!-- 배너 -->
    <c:set var="boardName" value="문의게시판" />
@@ -37,12 +37,6 @@
       </div>
       <!-- / container -->
    </header>
-   	<div id="preloader">
-		<div class="preloader">
-			<span></span> <span></span>
-		</div>
-	</div>
-
 	<div id="top"></div>
 	<!-- / top -->
 
