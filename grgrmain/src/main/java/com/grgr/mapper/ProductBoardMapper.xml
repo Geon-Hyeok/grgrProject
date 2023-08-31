@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grgr.mapper.ProductBoardMapper">
+	<!-- 게시판 등록 -->
+	<insert id="insert">
+		<selectKey keyProperty="productId"
+			resultType="java.lang.Integer" order="BEFORE">
+			SELECT PRODUCT_Id_SEQ.NEXTVAL
+			FROM DUAL
+		</selectKey>
+		insert into PRODUCT_BOARD (
+		PRODUCT_Id,
+		PRODUCT_TITLE,
+		PRODUCT_CONTENT,
+		PRODUCT_PRICE,
+		UNO
+		) values (
+		#{productId},
+		#{productTitle},
+		#{productContent},
+		#{productPrice},
+		#{uno}
+		)
+	</insert>
+
+	<!-- 게시판 목록 -->
+	<select id="getList" resultType="ProductBoardVO">
+		<![CDATA[
+        
+        select PRODUCT_ID, PRODUCT_TITLE, PRODUCT_CONTENT, UNO, PRODUCT_REGDATE, PRODUCT_UPDATE, PRODUCT_PRICE from(       
+                select /*+INDEX_DESC(PRODUCT_BOARD pk_board) */ rownum  as rn, PRODUCT_ID, PRODUCT_TITLE, PRODUCT_CONTENT, UNO, PRODUCT_REGDATE, PRODUCT_UPDATE, PRODUCT_PRICE                 
+                from PRODUCT_BOARD where rownum <= #{pageNum} * #{amount}
+    ]]>
+
+		<if test="keyword != null">
+			and PRODUCT_TITLE like '%'||#{keyword}||'%'
+		</if>
+    
+    <![CDATA[
+    
+    )                
+        where rn > (#{pageNum} -1) * #{amount}
+          ORDER BY
+        PRODUCT_ID DESC
+         ]]>
+
+
+	</select>
+
+	<!-- 게시글 조회 -->
+	<select id="getPage" resultType="ProductBoardVO">
+		select * from PRODUCT_BOARD
+		where
+		PRODUCT_ID = #{productId}
+	</select>
+
+	<!-- 테이블 JOIN을 위한 부가 코드 -->
+	<resultMap id="productBoardUserInfo"
+		type="ProductBoardVO">
+		<id property="productId" column="PRODUCT_Id" />
+		<result property="productTitle" column="PRODUCT_TITLE" />
+		<result property="productContent" column="PRODUCT_CONTENT" />
+		<result property="productPrice" column="PRODUCT_Price" />
+		<result property="productRegdate" column="PRODUCT_REGDATE" />
+		<association property="userInfo" resultMap="userInfoMap" />
+	</resultMap>
+
+	<resultMap id="userInfoMap" type="Userinfo">
+		<result property="nickName" column="nickname" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+	</resultMap>
+	
+	<!-- 조인을 활용한 상품 판매자 정보 -->
+	<select id="getBoardUserInfo"
+		resultType="ProductUserDTO">
+		SELECT
+		pb.PRODUCT_Id,
+		pb.PRODUCT_TITLE,
+		pb.PRODUCT_CONTENT,
+		pb.PRODUCT_Price,
+		pb.PRODUCT_REGDATE,
+		u.nickname,
+		u.phone,
+		u.email
+		FROM
+		PRODUCT_BOARD pb
+		JOIN
+		USERINFO u ON pb.UNO = u.uno
+		WHERE
+		pb.PRODUCT_Id =
+		#{productId}
+	</select>
+
+	<!-- 게시글 수정 -->
+	<update id="modify">
+		update PRODUCT_BOARD set PRODUCT_TITLE =
+		#{productTitle}, PRODUCT_CONTENT =
+		#{productContent}, PRODUCT_PRICE =
+		#{productPrice},
+		PRODUCT_UPDATE =
+		sysdate where PRODUCT_ID =
+		#{productId}
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="delete">
+		delete from PRODUCT_BOARD where PRODUCT_ID =
+		#{productId}
+	</delete>
+
+	<!-- 게시물 총 갯수 -->
+	<select id="getTotal" resultType="int">
+		select count(*) from PRODUCT_BOARD
+		<if test="keyword != null">
+			where PRODUCT_TITLE like '%'||#{keyword}||'%'
+		</if>
+	</select>
+
+	<!-- 조회수 올리기 --> <!-- 구현 못함 -->
+	<update id="updateViewCnt">
+		update PRODUCT_BOARD set PRODUCT_VIEW_CNT =
+		PRODUCT_VIEW_CNT + 1 where PRODUCT_ID = #{product_Id}
+	</update>
+</mapper>
