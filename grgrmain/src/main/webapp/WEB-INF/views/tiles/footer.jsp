@@ -3,20 +3,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="kor">
+<style>
+.custom-text {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 15px;
+}
+</style>
 <body>
-	<footer style="padding-bottom: 0px;">
+	<footer style="padding-bottom: 0px; background-color: #E2E6FC;">
 		<div class="container">
 			<div class="row v-center mobile-center">
 				<!-- 고객센터 안내 -->
 				<div class="col-md-5 footer-left-area tablet-top">
-					<h6 class="widget-title mb-20">고객센터</h6>
-					<p class="mb-15">평일 10:00 ~18:00<br>(점심시간 13:00 - 14:00 제외 · 주말/공휴일 제외)</p>
+					<h6 class="H4 Heading" style="margin-bottom: 10px;">고객센터</h6>
+					<p class="lead" style="font-size: 18px; margin-bottom: 70px;border-bottom-width: 50px;">평일 10:00 ~18:00<br>(점심시간 13:00 - 14:00 제외 · 주말/공휴일 제외)</p>
 				</div>
 								
 				<!-- 카테고리 -->
 				<div class="col-md-7">
                      <div class="widget p-y-10">
-                         <h6 class="widget-title mb-20">끼리끼리 소개</h6>
+                         <h6 class="H4 Heading">끼리끼리 소개</h6>
                          <div class="row">
                              <div class="col-3">
                                  <ul class="list-unstyled list-icon list-arrow list-primary list-has-link menu-list mb-0 tablet-lg-top">
@@ -62,14 +69,15 @@
 		</div>
 	</footer>
 	
-     <footer style="padding-top: 10; padding-bottom:10px;">	
+     <footer style="padding-top: 10;padding-bottom:10px;padding-top: 5px;">	
 		<div class="container">
 			<div class="container text-center">
-				<p class="widget p-y-10">끼리끼리는 통신판매중개자로서 통신판매의 당사자가 아니며 개별 판매자가 제공하는 서비스에 대한 이행, 계약사항 등과 관련한 의무와 책임은 거래당사자에게 있습니다.</p>
+				<p class="widget p-y-10" style="font-size: 13px;margin-bottom: 0px;padding-top: 0px;border-top-width: 0px;">
+				끼리끼리는 통신판매중개자로서 통신판매의 당사자가 아니며 개별 판매자가 제공하는 서비스에 대한 이행, 계약사항 등과 관련한 의무와 책임은 거래당사자에게 있습니다.</p>
 			</div>
 
 			<div class="container text-cente">
-				<p class="widget p-y-10">
+				<p class="widget p-y-10" style="font-size: 13px;">
 				상호명:끼리끼리 · 대표이사:아이티윌 · 개인정보책임관리자:아이티윌 · 주소:서울특별시 강남구 테헤란로 124, 삼원타워 4층
 				사업자등록번호:123-45-67890<br>
 				통신판매업신고증:제 2023-아이티윌-00001 호 · 직업정보제공사업 신고번호:한국청 제 2023-01호

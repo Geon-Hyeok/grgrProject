@@ -43,7 +43,22 @@
 </head>
 
 <body>
+	<!-- 헤더 -->
 	<jsp:include page="/WEB-INF/views/tiles/header.jsp" />
+	<!-- 배너 -->
+	<c:set var="boardName" value="판매게시판" />
+	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/market.jpg); background-size: cover;">
+		<div class="container text-center">
+			<h1 class="page-title">Free</h1>
+				<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
+			<a href="#start" class="btn btn-sm btn-primary smooth-scroll">
+			<i class="fas fa-shopping-cart mr-5"></i> 
+			<span>쇼핑하러 가기</span>
+			</a>
+		</div>
+		<!-- / container -->
+	</header>
+
 	<div id="preloader">
 		<div class="preloader">
 			<span></span> <span></span>
@@ -53,17 +68,6 @@
 	<div id="top"></div>
 	<!-- / top -->
 
-	<header class="xl bg-img bg-fixed"
-		style="background-image: url(${pageContext.request.contextPath}/assets/images/placeholder.jpg)">
-
-		<div class="container text-center">
-			<h1 class="page-title">Market</h1>
-			<p class="w-50 m-x-auto mb-30">끼리끼리 옹기종기 장터</p>
-			<a href="#start" class="btn btn-sm btn-primary smooth-scroll"><i
-				class="fas fa-shopping-cart mr-5"></i> <span>쇼핑하러 가기</span></a>
-		</div>
-		<!-- / container -->
-	</header>
 
 	<section id="start" class="lg page-section">
 		<!-- <ul class="portfolio-filter list-inline text-center mb-30">

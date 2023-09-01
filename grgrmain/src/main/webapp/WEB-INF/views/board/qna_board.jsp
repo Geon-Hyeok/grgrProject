@@ -36,7 +36,6 @@
 }
 </style>
 </head>
-
 <body>
 <!-- 헤더 -->
    <jsp:include page="/WEB-INF/views/tiles/header.jsp"/>
@@ -48,10 +47,16 @@
          <p class="w-50 m-x-auto mb-30"><c:out value="${boardName}" /></p>
       </div>
       <!-- / container -->
-   </header>
-   <div id="top"></div>
-	<!-- / top -->
+	</header>
 
+	<div id="preloader">
+		<div class="preloader">
+			<span></span> <span></span>
+		</div>
+	</div>
+
+	<div id="top"></div>
+	<!-- / top -->
 
 	<!-- 큰 컨테이너  -->
 	<section class="lg bg-light-grey">

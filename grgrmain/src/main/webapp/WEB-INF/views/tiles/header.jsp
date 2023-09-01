@@ -42,9 +42,7 @@
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
 <body>
-	<header class="xxl bg-img "
-		style="background-image: url(${pageContext.request.contextPath}/images/purple.png);
-		padding-bottom: 0px; padding-top: 125px;">
+	<header class="xxl bg-img " style="background-color: #E2E6FC; padding-bottom: 0px; padding-top: 125px;">
 		<nav
 			class="navbar navbar-expand-lg navbar-light absolute top-0 left-0 right-0">
 			<div class="container">
