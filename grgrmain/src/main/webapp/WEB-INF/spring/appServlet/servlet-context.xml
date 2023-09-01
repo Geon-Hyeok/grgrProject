@@ -51,10 +51,10 @@
 			<beans:ref bean="adminAuthInterceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/user/**"/> 
+			<!--  <mapping path="/user/**"/>  -->
 			<mapping path="/infoboard/**"/>
 			<mapping path="/board/**"/>
-			<exclude-mapping path="/user/login-register"/>
+			<!-- <exclude-mapping path="/user/login-register"/> -->
 			<beans:ref bean="loginAuthInterceptor"/>
 		</interceptor>
 	</interceptors>

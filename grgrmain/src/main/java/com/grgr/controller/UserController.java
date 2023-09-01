@@ -157,7 +157,7 @@ public class UserController {
 		String encodePw = "";
 
 		UserVO loginSuccessUser = userService.userLogin(user);
-		
+
 		if (loginSuccessUser != null) { // 일치하는 아이디 존재
 
 			rawPw = user.getUserPw(); // 사용자가 제출한 비밀번호
@@ -165,12 +165,12 @@ public class UserController {
 
 			if (true == pwEncoder.matches(rawPw, encodePw)) { // 일치여부 판단
 				loginSuccessUser.setUserPw(""); // 인코딩된 비밀번호 정보 지움
-				session.setAttribute("loginId", loginSuccessUser.getUserId()); 
-				session.setAttribute("loginNickname", loginSuccessUser.getNickName()); 
-				session.setAttribute("loginUno", loginSuccessUser.getUno()); 
-				session.setAttribute("loginActive", loginSuccessUser.getActive()); 
-				session.setAttribute("loginUserStatus", loginSuccessUser.getUserStatus()); 
-				session.setAttribute("loginUserLoc", loginSuccessUser.getLastLogin()); 
+				session.setAttribute("loginId", loginSuccessUser.getUserId());
+				session.setAttribute("loginNickname", loginSuccessUser.getNickName());
+				session.setAttribute("loginUno", loginSuccessUser.getUno());
+				session.setAttribute("loginActive", loginSuccessUser.getActive());
+				session.setAttribute("loginUserStatus", loginSuccessUser.getUserStatus());
+				session.setAttribute("loginUserLoc", loginSuccessUser.getLastLogin());
 				return "redirect:/main"; // 메인페이지 이동
 			} else {
 				rttr.addFlashAttribute("result", 0);
@@ -185,102 +185,95 @@ public class UserController {
 
 	}
 
-	
-	
-	
 	/* 아이디 찾기 */
 	@GetMapping("/find-id")
-    public String findIdByNameAndEmailPageGET() {
-        return "user/find-id"; // 아이디 찾기 페이지로 이동하는 뷰 이름
-    }
+	public String findIdByNameAndEmailPageGET() {
+		return "user/find-id"; // 아이디 찾기 페이지로 이동하는 뷰 이름
+	}
 
-    @PostMapping("/find-id")
-    @ResponseBody
-    public String findIdByNameAndEmailPOST(String name, String email) {
-        String userId = userService.findUserIdByNameAndEmail(name, email);
-        if (userId != null) {
-            return userId;
-        } else {
-            return "not-found";
-        }
-    }
-    
-    /* 비밀번호 찾기 */
-    @GetMapping("/forgot-password")
-    public String showForgotPasswordPage() {
-        return "user/forgot-password";
-    }
+	@PostMapping("/find-id")
+	@ResponseBody
+	public String findIdByNameAndEmailPOST(String name, String email) {
+		String userId = userService.findUserIdByNameAndEmail(name, email);
+		if (userId != null) {
+			return userId;
+		} else {
+			return "not-found";
+		}
+	}
 
-    @PostMapping("/forgot-password")
-    public String sendResetPasswordEmail(@RequestParam("userId") String userId,
-                                         @RequestParam("email") String email,
-                                         RedirectAttributes redirectAttributes) {
-    	
-    	UserVO user = userService.findUserByIdAndEmail(userId, email);
+	/* 비밀번호 찾기 */
+	@GetMapping("/forgot-password")
+	public String showForgotPasswordPage() {
+		return "user/forgot-password";
+	}
 
-        if (user != null) {
-            String newPassword = generateRandomPassword(); // 임시 비밀번호 생성
-            String encryptedPassword = encodePassword(newPassword); // 비밀번호 암호화
-            user.setUserPw(encryptedPassword);
-            userService.updateUserPassword(user);
+	@PostMapping("/forgot-password")
+	public String sendResetPasswordEmail(@RequestParam("userId") String userId, @RequestParam("email") String email,
+			RedirectAttributes redirectAttributes) {
 
-            String emailContent = "임시 비밀번호: " + newPassword; // 이메일 내용
-            sendEmail(email, "비밀번호 초기화", emailContent);
+		UserVO user = userService.findUserByIdAndEmail(userId, email);
 
-            redirectAttributes.addFlashAttribute("successMessage", "임시 비밀번호가 이메일로 발송되었습니다.");
-        } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "일치하는 사용자 정보가 없습니다.");
-        }
+		if (user != null) {
+			String newPassword = generateRandomPassword(); // 임시 비밀번호 생성
+			String encryptedPassword = encodePassword(newPassword); // 비밀번호 암호화
+			user.setUserPw(encryptedPassword);
+			userService.updateUserPassword(user);
 
-        return "redirect:/user/login-register";
-    }
+			String emailContent = "임시 비밀번호: " + newPassword; // 이메일 내용
+			sendEmail(email, "비밀번호 초기화", emailContent);
 
-    private void sendEmail(String to, String subject, String content) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(content);
-        mailSender.send(message);
-    }
+			redirectAttributes.addFlashAttribute("successMessage", "임시 비밀번호가 이메일로 발송되었습니다.");
+		} else {
+			redirectAttributes.addFlashAttribute("errorMessage", "일치하는 사용자 정보가 없습니다.");
+		}
 
-    private String generateRandomPassword() {
-        // 임시 비밀번호 생성 로직 구현
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder newPassword = new StringBuilder();
-        int length = 10; // 임시 비밀번호의 길이
-        for (int i = 0; i < length; i++) {
-            int index = (int) (Math.random() * characters.length());
-            newPassword.append(characters.charAt(index));
-        }
-        return newPassword.toString();
-    }
+		return "redirect:/user/login-register";
+	}
 
-    private String encodePassword(String password) {
-        // BCryptPasswordEncoder 사용하여 password를 암호화하는 로직
-        return pwEncoder.encode(password);
-    }
+	private void sendEmail(String to, String subject, String content) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(to);
+		message.setSubject(subject);
+		message.setText(content);
+		mailSender.send(message);
+	}
 
-    
-   
-    @PostMapping("/location")
-    @ResponseBody
-    public String updateLocation(@RequestBody UserVO userVO) {
-         //서비스를 호출하여 위치 정보를 업데이트
-        userService.updateUserLocation(userVO.getUserId(), userVO.getUserLocation());
+	private String generateRandomPassword() {
+		// 임시 비밀번호 생성 로직 구현
+		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		StringBuilder newPassword = new StringBuilder();
+		int length = 10; // 임시 비밀번호의 길이
+		for (int i = 0; i < length; i++) {
+			int index = (int) (Math.random() * characters.length());
+			newPassword.append(characters.charAt(index));
+		}
+		return newPassword.toString();
+	}
 
-        return "Location updated successfully.";
-    }
-        
-    
-    /* 메인페이지 로그아웃 */
-    @GetMapping("/logout")
-    public String logoutMainGET(HttpServletRequest request) throws Exception {
-    	logger.info("logoutMainGET 메서드 진입");
-    	
-    	HttpSession session = request.getSession();
-    	
-    	session.invalidate();
-    	
-    	return "redirect:/main";
-    }
+	private String encodePassword(String password) {
+		// BCryptPasswordEncoder 사용하여 password를 암호화하는 로직
+		return pwEncoder.encode(password);
+	}
+
+	@PostMapping("/location")
+	@ResponseBody
+	public String updateLocation(@RequestBody UserVO userVO) {
+		// 서비스를 호출하여 위치 정보를 업데이트
+		userService.updateUserLocation(userVO.getUserId(), userVO.getUserLocation());
+
+		return "Location updated successfully.";
+	}
+
+	/* 메인페이지 로그아웃 */
+	@GetMapping("/logout")
+	public String logoutMainGET(HttpServletRequest request) throws Exception {
+		logger.info("logoutMainGET 메서드 진입");
+
+		HttpSession session = request.getSession();
+
+		session.invalidate();
+
+		return "redirect:/main";
+	}
 }
