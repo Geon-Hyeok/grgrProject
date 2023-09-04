@@ -256,14 +256,19 @@ public class UserController {
 		return pwEncoder.encode(password);
 	}
 
-	@PostMapping("/location")
-	@ResponseBody
-	public String updateLocation(@RequestBody UserVO userVO) {
-		// 서비스를 호출하여 위치 정보를 업데이트
-		userService.updateUserLocation(userVO.getUserId(), userVO.getUserLocation());
-
-		return "Location updated successfully.";
-	}
+	/* Reverse Geocoder + NaverMaps API */
+    @PostMapping("/getAddress")
+    @ResponseBody
+    public String getAddressFromCoordinates(HttpSession session
+    										,@RequestParam("latitude") String latitude
+                                            ,@RequestParam("longitude") String longitude) {
+        
+    	String loginId = (String) session.getAttribute("loginId");
+        String combinedAddress = userService.getAddressFromCoordinates(loginId,latitude,longitude);
+        session.setAttribute("loginLocation", combinedAddress);
+        
+        return combinedAddress;
+    }
 
 	/* 메인페이지 로그아웃 */
 	@GetMapping("/logout")

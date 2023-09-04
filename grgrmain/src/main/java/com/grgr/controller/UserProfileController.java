@@ -46,15 +46,19 @@ public class UserProfileController {
 
 	/* 회원 조회(마이페이지) */
 	@GetMapping("/userProfile")
-	public void userProfilePageGet(int uno, Model model) {
-		logger.info("회원 마이페이지 진입");
-		// model.addAttribute("profile", userService.userProfile(uno));
+	public String userProfilePageGet(HttpSession session, Model model) {
+	    logger.info("회원 마이페이지 진입");
+	    
+	    Integer uno = (Integer) session.getAttribute("loginUno"); 
+	    model.addAttribute("user", userService.userProfile(uno));
+	    return "mypage/userProfile";
 	}
-
+	
 	/* 회원 정보 수정 페이지 이동 */
 	@GetMapping("/updateUserProfile")
-	public void updateUserProfileGet(int uno, Model model) {
+	public void updateUserProfileGet(HttpSession session, Model model) {
 		logger.info("회원 정보 수정 페이지 진입");
+		 Integer uno = (Integer) session.getAttribute("loginUno"); 
 		model.addAttribute("user", userService.userProfile(uno));
 	}
 
