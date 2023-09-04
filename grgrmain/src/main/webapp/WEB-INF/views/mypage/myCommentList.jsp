@@ -84,7 +84,7 @@
 	<!-- 큰 컨테이너  -->
 	<section class="big">
 		<div class="container">
-			<h2 class="hidden">userComment List</h2>
+			<h2 class="hidden">userCommentList</h2>
 			<!-- 키워드 -->
 			<ul class="list-inline text-center mb-30">
 				<li id="keyword-button"><a
