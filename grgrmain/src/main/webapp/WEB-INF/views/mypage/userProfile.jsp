@@ -206,7 +206,7 @@
 		<!-- / navbar -->
 		<div class="container relative z-index-1">
 			<h1 class="page-title text-left mb-15">
-				<c:out value="${usr.nickName}" />
+				<c:out value="${user.nickName}" />
 				님의 페이지
 			</h1>
 			<nav class="breadcrumb relative z-index-1 pt-10 pl-5">
