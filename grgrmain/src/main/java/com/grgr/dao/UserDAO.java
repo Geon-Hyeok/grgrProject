@@ -64,8 +64,6 @@ public interface UserDAO {
 	 /* 비밀번호 업데이트*/
 	 public void updateUserPassword(UserVO user);
 	 
-	
-	 
-	 /* 유저 위치정보 업데이트*/
-	 void updateUserLocation(String userId, String address);
+	 /* 유저 위치 정보 업데이트*/
+	 void getAddressFromCoordinate(String  loginId, String address);
 }

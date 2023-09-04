@@ -84,6 +84,7 @@
 					
 					
 						<span>${loginNickname}님, 환영합니다.</span>
+						<button onclick="updateLocation()">Update Location</button>
 					<ul class="navbar-button p-0 m-0 ml-80">
 						<li class="nav-item"><a href="<c:url value="/mypage/userProfile"/>"
 							class="btn btn-sm btn-primary pill"> <i
@@ -180,8 +181,35 @@
 				});
 			}
 		});
-	</script>
-	<!-- / portfolio script -->
+	
+		function updateLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "user/getAddress", 
+                        data: {
+                            latitude: latitude,
+                            longitude: longitude
+                        },
+                        success: function(response) {
+                            alert("위치 정보가 업데이트 되었습니다.");
+                        },
+                        error: function(error) {
+                            alert("위치 정보 업데이트에 실패 했습니다.");
+                        }
+                    });
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+		
+		</script>
+	
 
 </body>
 

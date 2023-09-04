@@ -4,10 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grgr.dao.UserDAO;
 import com.grgr.dto.MyBoardWriteDTO;
 import com.grgr.dto.MyCommentDTO;
@@ -150,10 +157,67 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	
+
+	/* Geolocation API + NaverMaps Reverse-geocode API 를 통해 클라이언트 측에서 보낸 위도, 경도 좌표를 주소명으로 반환*/
 	@Override
-	public void updateUserLocation(String userId, String address) {
-		userDAO.updateUserLocation(userId, address);
-		
+	public String getAddressFromCoordinates(String loginId, String latitude, String longitude) {
+	    String coords = longitude + "," + latitude;
+	    String naverUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords="
+	            +coords+"&sourcecrs=epsg:4326&orders=roadaddr&output=json";
+
+	    RestTemplate restTemplate = new RestTemplate();
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.add("X-NCP-APIGW-API-KEY-ID", "5vx586o8ep");
+	    headers.add("X-NCP-APIGW-API-KEY", "GQiKScHBOVetAAUcHcjgYcnptDyTq3m8Aeva3Stb");
+
+	    HttpEntity<?> entity = new HttpEntity<>(headers);
+
+	    ResponseEntity<String> response = restTemplate.exchange(naverUrl, HttpMethod.GET, entity, String.class);
+	    String responseBody = response.getBody();
+	    String address = parseAddressFromResponse(responseBody);
+
+	    
+	    
+	    if (loginId != null) {
+	        userDAO.getAddressFromCoordinate(loginId, address);
+	    }
+	    return address;
+	}
+	
+	/* Naver Maps API의 응답(JSON)을 PARSING 해주는 메소드*/
+	
+	private String parseAddressFromResponse(String responseBody) {
+	    try {
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        JsonNode rootNode = objectMapper.readTree(responseBody);
+
+	        
+	        JsonNode resultsNode = rootNode.path("results");
+	        if (resultsNode.isArray() && resultsNode.size() > 0) {
+	            JsonNode firstResultNode = resultsNode.get(0);
+	            
+	            String name = firstResultNode.path("name").asText();
+
+	            
+	            JsonNode area1Node = firstResultNode.path("region").path("area1").path("name");
+	            JsonNode area2Node = firstResultNode.path("region").path("area2").path("name");
+	            JsonNode area3Node = firstResultNode.path("region").path("area3").path("name");
+
+	            
+	            String area1Name = area1Node.asText();
+	            String area2Name = area2Node.asText();
+	            String area3Name = area3Node.asText();
+
+	            
+	            String combinedAddress = area1Name + ", " + area2Name + ", " + area3Name;
+	            return combinedAddress;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return null; 
 	}
 
 	
