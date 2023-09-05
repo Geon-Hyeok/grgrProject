@@ -222,7 +222,7 @@
 	<!-- 위로 버튼 -->
 	<a href="#top" class="scroll-to-top smooth-scroll"
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
-	<%@ include file="footer.jsp"%>
+	<jsp:include page="/WEB-INF/views/tiles/footer.jsp" />
 
 	<!-- core JavaScript -->
 	<script

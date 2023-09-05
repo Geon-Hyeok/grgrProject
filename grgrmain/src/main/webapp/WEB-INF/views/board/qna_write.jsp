@@ -149,7 +149,7 @@
 		src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
 	<!-- / core JavaScript -->
 
-	<!-- preloader -->
+	<!-- preloader --> 
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
 	<!-- / preloader -->
 
