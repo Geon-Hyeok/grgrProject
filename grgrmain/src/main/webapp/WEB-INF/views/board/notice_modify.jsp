@@ -52,17 +52,20 @@
 </style>
 <body>
 	<!-- 헤더 -->
-	<jsp:include page="/WEB-INF/views/tiles/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/tiles/header.jsp" />
 	<!-- 배너 -->
 	<c:set var="boardName" value="공지게시판" />
-   <header class="xl bg-img bg-fixed" style="height: 300px; padding-top: 200px;">
-      <div class="container text-center">
-         <h1 class="page-title">Notice</h1>
-         <p class="w-50 m-x-auto mb-30"><c:out value="${boardName}" /></p>
-      </div>
-      <!-- / container -->
-   </header>
-  </header>
+	<header class="xl bg-img bg-fixed"
+		style="height: 300px; padding-top: 200px;">
+		<div class="container text-center">
+			<h1 class="page-title">Notice</h1>
+			<p class="w-50 m-x-auto mb-30">
+				<c:out value="${boardName}" />
+			</p>
+		</div>
+		<!-- / container -->
+	</header>
+	</header>
 
 	<div id="preloader">
 		<div class="preloader">
@@ -72,7 +75,7 @@
 
 	<div id="top"></div>
 	<!-- / top -->
-	
+
 	<script type="text/javascript">
 		
 	</script>
@@ -87,8 +90,9 @@
 				<form action="modify" method="post" class="validation-inner"
 					id="form-validation" novalidate="novalidate">
 					<input type="hidden" name="uno" value="${noticeBoard.uno}" /> <input
-						type="hidden" name="noticeBno" value="${noticeBoard.noticeBno}" /> <input
-						type="hidden" name="noticeUpdateUno" value="${sessionScope.loginUno}" /> 
+						type="hidden" name="noticeBno" value="${noticeBoard.noticeBno}" />
+					<input type="hidden" name="noticeUpdateUno"
+						value="${sessionScope.loginUno}" />
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
@@ -137,29 +141,7 @@
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
 	<!-- footer 영역 -->
-	<footer>
-		<div class="container">
-			<div class="row v-center mobile-center">
-				<div class="col-md-4 footer-left-area tablet-top">
-					<p>
-						© Soft UI by <a href="https://kingstudio.ro" target="_blank">KingStudio</a>
-					</p>
-				</div>
-				<!-- / footer-left-area -->
-				<div class="col-md-8 footer-right-area">
-					<p>
-						<a href="../index.html" class="text-link mr-15">Home</a> <a
-							href="../components.html" class="text-link mr-15">Components</a>
-						<a href="../sections.html" class="text-link mr-15">Sections</a> <a
-							href="../templates.html" class="text-link">Templates</a>
-					</p>
-				</div>
-				<!-- / footer-right-area -->
-			</div>
-			<!-- / row -->
-		</div>
-		<!-- / container -->
-	</footer>
+	<jsp:include page="/WEB-INF/views/tiles/footer.jsp" />
 
 	<!-- core JavaScript -->
 	<script
@@ -174,13 +156,6 @@
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
 	<!-- / preloader -->
 
-	<!-- smooth scroll -->
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.easing.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/smooth-scroll.js"></script>
-	<!-- / smooth scroll -->
-
 	<!-- hide nav -->
 	<script src="${pageContext.request.contextPath}/assets/js/hide-nav.js"></script>
 	<!-- / hide nav -->
@@ -191,37 +166,37 @@
 	<script src="${pageContext.request.contextPath}/assets/js/portfolio.js"></script>
 	<script>
 		$(document)
-			.ready(
-				function() {
+				.ready(
+						function() {
 
-					document
-						.querySelector('#modify-submit')
-						.addEventListener(
-								'click',
-								function() {
-									var infoBoardUno = "${noticeBoard.uno}";
-								    var loginUno = "${sessionScope.loginUno}";
-								    
-								    //권한이 없는 사용자가 get방식으로 페이지를 요청하여 수정하는것 방지
-								    if (noticeBoardUno !== loginUno) {
-								        window.location.href = "<c:url value="/404"/>"; 
-								        return;
-								    }
-									
-									var title = document
-											.getElementsByName('noticeTitle')[0].value;
-									var content = document
-											.getElementsByName('noticeContent')[0].value;
+							document
+									.querySelector('#modify-submit')
+									.addEventListener(
+											'click',
+											function() {
+												var infoBoardUno = "${noticeBoard.uno}";
+												var loginUno = "${sessionScope.loginUno}";
 
-									if (title.trim() === ''
-											|| content.trim() === '') {
-										alert('제목과 내용을 모두 입력해주세요.');
-									} else {
-										document.getElementById(
-												'form-validation')
-												.submit(); // 폼을 제출
-									}
-								});
+												//권한이 없는 사용자가 get방식으로 페이지를 요청하여 수정하는것 방지
+												if (noticeBoardUno !== loginUno) {
+													window.location.href = "<c:url value="/404"/>";
+													return;
+												}
+
+												var title = document
+														.getElementsByName('noticeTitle')[0].value;
+												var content = document
+														.getElementsByName('noticeContent')[0].value;
+
+												if (title.trim() === ''
+														|| content.trim() === '') {
+													alert('제목과 내용을 모두 입력해주세요.');
+												} else {
+													document.getElementById(
+															'form-validation')
+															.submit(); // 폼을 제출
+												}
+											});
 							if (Modernizr.touch) {
 								// show the close overlay button
 								$('.close-overlay').removeClass('hidden');
