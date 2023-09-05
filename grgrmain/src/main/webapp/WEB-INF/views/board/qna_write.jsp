@@ -148,7 +148,7 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
-	<!-- / core JavaScript -->
+	<!-- / core JavaScript --> 
 
 	<!-- preloader -->
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
