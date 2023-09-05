@@ -206,8 +206,7 @@
 										alt="끼리끼리 favicon">
 									<h6 class="card-title fw-bold mb-10 text-black">${sales.productTitle }</h6>
 									<p class="card-text mb-30">${sales.productContent }</p>
-									<p class="fs-12 post-meta-small mt-15 mb-0">
-									</p>
+									<p class="fs-12 post-meta-small mt-15 mb-0"></p>
 								</div>
 							</a>
 						</div>
@@ -236,13 +235,6 @@
 	<!-- preloader -->
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
 	<!-- / preloader -->
-
-	<!-- smooth scroll -->
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.easing.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/smooth-scroll.js"></script>
-	<!-- / smooth scroll -->
 
 	<!-- hide nav -->
 	<script src="${pageContext.request.contextPath}/assets/js/hide-nav.js"></script>

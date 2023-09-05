@@ -42,7 +42,8 @@
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
 <body>
-	<header class="xxl bg-img " style="background-color: #E2E6FC; padding-bottom: 0px; padding-top: 125px;">
+	<header class="xxl bg-img "
+		style="background-color: #E2E6FC; padding-bottom: 0px; padding-top: 125px;">
 		<nav
 			class="navbar navbar-expand-lg navbar-light absolute top-0 left-0 right-0">
 			<div class="container">
@@ -76,16 +77,18 @@
 						<li class="nav-item"><a
 							href="<c:url value="/user/login-register"/>"
 							class="btn btn-sm btn-primary pill"> <i
-								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i> <span>로그인/ 회원가입</span>
+								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i> <span>로그인/
+									회원가입</span>
 						</a></li>
 					</ul>
 				</c:if>
 				<c:if test="${loginUno!=null && loginUserStatus!=1 }">
-					
-					
-						<span>${loginNickname}님, 환영합니다.</span>
+
+
+					<span>${loginNickname}님, 환영합니다.</span>
 					<ul class="navbar-button p-0 m-0 ml-80">
-						<li class="nav-item"><a href="<c:url value="/mypage/userProfile"/>"
+						<li class="nav-item"><a
+							href="<c:url value="/mypage/userProfile"/>"
 							class="btn btn-sm btn-primary pill"> <i
 								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i><span>마이페이지</span>
 						</a></li>
@@ -98,13 +101,15 @@
 					</ul>
 				</c:if>
 				<c:if test="${loginUno!=null && loginUserStatus==1 }">
-					
-						<span>관리자님, 환영합니다.</span>
-					
+
+					<span>관리자님, 환영합니다.</span>
+
 					<ul class="navbar-button p-0 m-0 ml-80">
-						<li class="nav-item"><a href="<c:url value="/admin/user-list"/>"
+						<li class="nav-item"><a
+							href="<c:url value="/admin/user-list"/>"
 							class="btn btn-sm btn-primary pill"> <i
-								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i><span>관리자 페이지</span>
+								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i><span>관리자
+									페이지</span>
 						</a></li>
 					</ul>
 					<ul class="navbar-button p-0 m-0 ml-80">
@@ -134,13 +139,6 @@
 	<!-- preloader -->
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
 	<!-- / preloader -->
-
-	<!-- smooth scroll -->
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.easing.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/smooth-scroll.js"></script>
-	<!-- / smooth scroll -->
 
 	<!-- hide nav -->
 	<script src="${pageContext.request.contextPath}/assets/js/hide-nav.js"></script>
