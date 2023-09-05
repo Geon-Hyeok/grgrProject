@@ -62,203 +62,149 @@
 					<div class="card-body p-x-25">
 						<ul class="nav nav-tabs nav-pills text-center p-x-50"
 							role="tablist">
-							<li class="nav-item m-x-auto"><a
-								class="nav-link active p-x-40" data-bs-toggle="tab"
-								href="#tab-sign-in" role="tab"> <i
+							<li class="nav-item"><a
+								class="nav-link active p-x-40"
+								href="<c:url value="/user/login"/>" > <i
 									class="fas fa-lock mr-5 va-middle"></i> <span class="va-middle">로그인</span>
 							</a></li>
 							<li class="nav-item nav-tabs nav-pills m-x-auto"><a
-								class="nav-link p-x-40" data-bs-toggle="tab"
+								class="nav-link active p-x-40" data-bs-toggle="tab"
 								href="#tab-register" role="tab"> <i
 									class="fas fa-user mr-5 va-middle"></i> <span class="va-middle">회원가입</span>
 							</a></li>
 						</ul>
 						<!-- / nav tabs -->
-						<div class="tab-content">
-							<div class="tab-pane fade show active mt-20 p-15"
-								id="tab-sign-in" role="tabpanel">
-								<form class="validation-inner" id="login-form3"
-									action="${pageContext.request.contextPath}/user/login-register"
-									method="post">
-									<div class="form-group">
-										<input type="text" class="form-control" name="userId"
-											placeholder="&#xf2bd; 아이디"
-											style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-									</div>
-									<!-- / form-group -->
-
-									<div class="form-group">
-										<input type="password" class="form-control" name="userPw"
-											placeholder="&#xf11c; 비밀번호" required
-											style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-									</div>
-									<c:if test="${result == 0 }">
-										<div class="login_warn">사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
-									</c:if>
-									<!-- / form-group -->
-
-									<!-- 아이디 찾기와 비밀번호 찾기 링크 -->
-									<div class="forgot-links">
-										<a href="${pageContext.request.contextPath}/user/find-id"
-											class="forgot-link">아이디 찾기</a> <span class="divider">|</span>
-										<a
-											href="${pageContext.request.contextPath}/user/forgot-password"
-											class="forgot-link">비밀번호 찾기</a>
-									</div>
-
-									<div class="row v-center mt-30">
-										<div class="col-lg-5 tablet-lg-top-30">
-											<!-- / checkbox -->
-										</div>
-										<!-- / column -->
-										<div class="col-lg-7 text-right">
-											<button type="submit"
-												class="btn btn-sm btn-primary tablet-lg-fw">
-												<i class="fas fa-sign-in-alt mr-5"></i> Sign In
-											</button>
-										</div>
-										<!-- / column -->
-									</div>
-									<!-- / row -->
-								</form>
+						
 								<!-- / login-form -->
-								<div class="pt-60 text-center">
-									<p style="margin-bottom: 4px;">간편 로그인</p>
-									<a href="#x" class="btn btn-sm btn-outline-facebook mt-5">
-										<span class="fab fa-facebook-f mr-5"></span> <span>Facebook</span>
-									</a> <a href="#x" class="btn btn-sm btn-outline-twitter mt-5">
-										<span class="fab fa-twitter mr-5"></span> <span>Twitter</span>
-									</a> <a href="#x" class="btn btn-sm btn-outline-warning mt-5">
-										<span class="fab fa-google mr-5"></span> <span>Google</span>
-									</a>
+
+								<div class="tab-pane mt-20 p-15" id="tab-register"
+									role="tabpanel">
+
+
+									<form class="validation-inner" id="join_form"
+										novalidate="novalidate" method="post">
+
+										<!-- / form-group -->
+										<div class="form-group">
+											<div class="form-group">
+												<input type="text" class="form-control user_input"
+													name="userName" placeholder="&#xf2bd; Username" required=""
+													style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
+												<span class="final_name_ck">이름을 입력해주세요.</span>
+											</div>
+										</div>
+										<!-- / form-group -->
+
+										<div class="form-group">
+											<input type="text" class="form-control id_input"
+												name="userId" placeholder="&#xf2bd; ID" required=""
+												style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
+											<span class="id_input_re_1">사용 가능한 아이디입니다.</span> <span
+												class="id_input_re_2">이미 사용중인 아이디 입니다.</span> <span
+												class="final_id_ck">아이디를 입력해주세요.</span>
+										</div>
+
+
+
+										<!-- / form-group -->
+										<div class="form-group">
+											<input type="password" id="passwordRegister3"
+												class="form-control pw_input" name="userPw"
+												placeholder="&#xf11c; Password"
+												style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
+											<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
+										</div>
+										<!-- / form-group -->
+										<div class="form-group">
+											<input type="password" class="form-control pwck_input"
+												name="passwordRegisterConfirm3"
+												placeholder="&#xf14a; Confirm Password" required=""
+												style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
+											<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span> <span
+												class="pwck_input_re_1">비밀번호가 일치합니다.</span> <span
+												class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
+										</div>
+										<!-- / form-group -->
+										<div class="form-group">
+											<input type="text" class="form-control nickName_input"
+												name="nickName" placeholder="&#xf2bd; Nickname" required=""
+												style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
+											<span class="nickName_input_re_1">사용 가능한 닉네임 입니다.</span> <span
+												class="nickName_input_re_2">이미 사용중인 닉네임 입니다.</span> <span
+												class="final_nickName_ck">닉네임을 입력해주세요.</span>
+										</div>
+										<!-- / form-group -->
+
+										<div class="form-group">
+											<input type="text" class="form-control phone_input"
+												name="phone" placeholder="&#xf2bd; Phone" required=""
+												style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
+											<span class="final_phone_ck">연락처를 입력해주세요.</span>
+										</div>
+
+										<!-- / form-group -->
+										<div class="form-group">
+											<div class="form-group">
+												<input type="text" class="form-control businessNo_input"
+													name="businessNo" placeholder="&#xf2bd; businessNo(선택사항)"
+													style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
+											</div>
+										</div>
+										<!-- / form-group -->
+										<div class="form-group">
+											<input type="email" class="form-control email_input"
+												name="email" placeholder="&#xf0e0; Email"
+												style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
+										</div>
+										<span class="final_email_ck">이메일을 입력해주세요.</span> <span
+											class="email_input_box_warn"></span>
+
+										<div class="form-group" id="email_check_input_box_false">
+											<input class="email_check_input" placeholder="&#xf0e0; 인증번호"
+												disabled="disabled">
+										</div>
+
+										<div class="email_check_button">
+											<span>인증번호 전송</span>
+										</div>
+										<span class="final_email_check_ck">인증번호를 입력해주세요.</span>
+										<div class="clearfix"></div>
+										<span id="email_check_input_box_warn"></span>
+										<!-- / form-group -->
+
+										<div class="row v-center mt-30">
+											<div class="col-xl-7 tablet-xl-top-30">
+												<div class="checkbox checkbox-primary ml-10">
+													<label class="hidden"><input type="checkbox"></label>
+													<input id="checkbox-register2" type="checkbox"> <label
+														for="checkbox-register2"><span> Accept <a
+															href="#x">Terms &amp; Conditions</a></span></label>
+												</div>
+												<!-- / checkbox -->
+											</div>
+											<!-- / column -->
+
+											<div class="col-xl-5 text-right">
+												<button type="submit"
+													class="btn btn-sm btn-primary tablet-xl-fw join_button">
+													<i class="fas fa-user mr-5"></i> Register
+												</button>
+											</div>
+											<!-- / column -->
+										</div>
+										<!-- / row -->
+									</form>
+									<!-- / register-form -->
 								</div>
 							</div>
-							<div class="tab-pane fade mt-20 p-15" id="tab-register"
-								role="tabpanel">
-
-
-								<form class="validation-inner" id="join_form"
-									novalidate="novalidate" method="post">
-
-									<!-- / form-group -->
-									<div class="form-group">
-										<div class="form-group">
-											<input type="text" class="form-control user_input"
-												name="userName" placeholder="&#xf2bd; Username" required=""
-												style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-											<span class="final_name_ck">이름을 입력해주세요.</span>
-										</div>
-									</div>
-									<!-- / form-group -->
-
-									<div class="form-group">
-										<input type="text" class="form-control id_input" name="userId"
-											placeholder="&#xf2bd; ID" required=""
-											style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-										<span class="id_input_re_1">사용 가능한 아이디입니다.</span> <span
-											class="id_input_re_2">이미 사용중인 아이디 입니다.</span> <span
-											class="final_id_ck">아이디를 입력해주세요.</span>
-									</div>
-
-
-
-									<!-- / form-group -->
-									<div class="form-group">
-										<input type="password" id="passwordRegister3"
-											class="form-control pw_input" name="userPw"
-											placeholder="&#xf11c; Password"
-											style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-										<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
-									</div>
-									<!-- / form-group -->
-									<div class="form-group">
-										<input type="password" class="form-control pwck_input"
-											name="passwordRegisterConfirm3"
-											placeholder="&#xf14a; Confirm Password" required=""
-											style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-										<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span> <span
-											class="pwck_input_re_1">비밀번호가 일치합니다.</span> <span
-											class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
-									</div>
-									<!-- / form-group -->
-									<div class="form-group">
-										<input type="text" class="form-control nickName_input"
-											name="nickName" placeholder="&#xf2bd; Nickname" required=""
-											style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-										<span class="nickName_input_re_1">사용 가능한 닉네임 입니다.</span> <span
-											class="nickName_input_re_2">이미 사용중인 닉네임 입니다.</span> <span
-											class="final_nickName_ck">닉네임을 입력해주세요.</span>
-									</div>
-									<!-- / form-group -->
-
-									<div class="form-group">
-										<input type="text" class="form-control phone_input"
-											name="phone" placeholder="&#xf2bd; Phone" required=""
-											style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-										<span class="final_phone_ck">연락처를 입력해주세요.</span>
-									</div>
-
-									<!-- / form-group -->
-									<div class="form-group">
-										<div class="form-group">
-											<input type="text" class="form-control businessNo_input"
-												name="businessNo" placeholder="&#xf2bd; businessNo(선택사항)"
-												style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-										</div>
-									</div>
-									<!-- / form-group -->
-									<div class="form-group">
-										<input type="email" class="form-control email_input"
-											name="email" placeholder="&#xf0e0; Email"
-											style="font-family: 'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-									</div>
-									<span class="final_email_ck">이메일을 입력해주세요.</span> <span
-										class="email_input_box_warn"></span>
-
-									<div class="form-group" id="email_check_input_box_false">
-										<input class="email_check_input" placeholder="&#xf0e0; 인증번호"
-											disabled="disabled">
-									</div>
-
-									<div class="email_check_button">
-										<span>인증번호 전송</span>
-									</div>
-									<span class="final_email_check_ck">인증번호를 입력해주세요.</span>
-									<div class="clearfix"></div>
-									<span id="email_check_input_box_warn"></span>
-									<!-- / form-group -->
-
-									<div class="row v-center mt-30">
-										<div class="col-xl-7 tablet-xl-top-30">
-											<div class="checkbox checkbox-primary ml-10">
-												<label class="hidden"><input type="checkbox"></label>
-												<input id="checkbox-register2" type="checkbox"> <label
-													for="checkbox-register2"><span> Accept <a
-														href="#x">Terms &amp; Conditions</a></span></label>
-											</div>
-											<!-- / checkbox -->
-										</div>
-										<!-- / column -->
-
-										<div class="col-xl-5 text-right">
-											<button type="submit"
-												class="btn btn-sm btn-primary tablet-xl-fw join_button">
-												<i class="fas fa-user mr-5"></i> Register
-											</button>
-										</div>
-										<!-- / column -->
-									</div>
-									<!-- / row -->
-								</form>
-								<!-- / register-form -->
-							</div>
+							<!-- / tab-content -->
 						</div>
-						<!-- / tab-content -->
+						<!-- / card-body -->
 					</div>
-					<!-- / card-body -->
+					<!-- / card -->
 				</div>
-				<!-- / card -->
 			</div>
+
 		</div>
 		<!-- / container -->
 		<p class="absolute bottom-15 x-0 text-center">

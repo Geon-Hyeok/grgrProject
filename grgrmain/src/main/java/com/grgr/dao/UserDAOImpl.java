@@ -129,12 +129,16 @@ public class UserDAOImpl implements UserDAO {
 	        sqlSession.update("com.grgr.mapper.UserMapper.updateUserPassword", user);
 	    }
 
-	
+
 	@Override
-    public void updateUserLocation(@Param("userId") String userId, @Param("address") String address) {
-        userMapper.updateUserLocation(userId, address);
-    }
+	public void getAddressFromCoordinate(String loginId, String address){
+		Map<Object, String> parameterMap = new HashMap<>();
+		parameterMap.put("loginId", loginId);
+		parameterMap.put("address", address);
+		sqlSession.update("getAddressFromCoordinate", parameterMap);
 	}
+	
+}
 	
 
 

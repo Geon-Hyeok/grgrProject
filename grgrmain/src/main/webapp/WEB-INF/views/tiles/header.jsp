@@ -42,7 +42,8 @@
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
 <body>
-	<header class="xxl bg-img " style="background-color: #E2E6FC; padding-bottom: 0px; padding-top: 125px;">
+	<header class="xxl bg-img "
+		style="background-color: #E2E6FC; padding-bottom: 0px; padding-top: 125px;">
 		<nav
 			class="navbar navbar-expand-lg navbar-light absolute top-0 left-0 right-0">
 			<div class="container">
@@ -73,19 +74,26 @@
 				<!-- / input-group -->
 				<c:if test="${loginUno==null}">
 					<ul class="navbar-button p-0 m-0 ml-80">
-						<li class="nav-item"><a
-							href="<c:url value="/user/login-register"/>"
+						<li class="nav-item"><a href="<c:url value="/user/login"/>"
 							class="btn btn-sm btn-primary pill"> <i
-								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i> <span>로그인/ 회원가입</span>
+								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i> <span>로그인</span>
+						</a></li>
+					</ul>
+					<ul class="navbar-button p-0 m-0 ml-80">
+						<li class="nav-item"><a href="<c:url value="/user/register"/>"
+							class="btn btn-sm btn-primary pill"> <i
+								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i> <span>회원가입</span>
 						</a></li>
 					</ul>
 				</c:if>
 				<c:if test="${loginUno!=null && loginUserStatus!=1 }">
-					
-					
-						<span>${loginNickname}님, 환영합니다.</span>
+
+
+					<span>${loginNickname}님, 환영합니다.</span>
+					<button onclick="updateLocation()">Update Location</button>
 					<ul class="navbar-button p-0 m-0 ml-80">
-						<li class="nav-item"><a href="<c:url value="/mypage/userProfile"/>"
+						<li class="nav-item"><a
+							href="<c:url value="/mypage/userProfile"/>"
 							class="btn btn-sm btn-primary pill"> <i
 								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i><span>마이페이지</span>
 						</a></li>
@@ -98,13 +106,15 @@
 					</ul>
 				</c:if>
 				<c:if test="${loginUno!=null && loginUserStatus==1 }">
-					
-						<span>관리자님, 환영합니다.</span>
-					
+
+					<span>관리자님, 환영합니다.</span>
+
 					<ul class="navbar-button p-0 m-0 ml-80">
-						<li class="nav-item"><a href="<c:url value="/admin/user-list"/>"
+						<li class="nav-item"><a
+							href="<c:url value="/admin/user-list"/>"
 							class="btn btn-sm btn-primary pill"> <i
-								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i><span>관리자 페이지</span>
+								class="fas fa-rotate-90 fs-12 va-middle mr-5"></i><span>관리자
+									페이지</span>
 						</a></li>
 					</ul>
 					<ul class="navbar-button p-0 m-0 ml-80">
@@ -180,8 +190,34 @@
 				});
 			}
 		});
+
+		function updateLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var latitude = position.coords.latitude;
+					var longitude = position.coords.longitude;
+
+					$.ajax({
+						type : "POST",
+						url : "user/getAddress",
+						data : {
+							latitude : latitude,
+							longitude : longitude
+						},
+						success : function(response) {
+							alert("위치 정보가 업데이트 되었습니다.");
+						},
+						error : function(error) {
+							alert("위치 정보 업데이트에 실패 했습니다.");
+						}
+					});
+				});
+			} else {
+				alert("Geolocation is not supported by this browser.");
+			}
+		}
 	</script>
-	<!-- / portfolio script -->
+
 
 </body>
 

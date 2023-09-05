@@ -49,5 +49,6 @@ public interface UserService {
 	 /* 비밀번호 업데이트*/
 	 public void updateUserPassword(UserVO user);
 	 
-	 void updateUserLocation(String userId, String address);
+	 /* 유저 위치 정보 업데이트*/
+	 String getAddressFromCoordinates(String loginId, String latitude, String longitude);
 }
