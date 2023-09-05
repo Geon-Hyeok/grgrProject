@@ -49,6 +49,13 @@ public class UserController {
 	private BCryptPasswordEncoder pwEncoder;
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
+	/* 회원가입페이지 이동 */
+	@GetMapping("/register")
+	public void registerPageGET() {
+		logger.info("회원가입 페이지 진입");
+
+	}
+
 	/* 회원가입 */ /* 추후에 수정 필요(회원가입 페이지 + 로그인 페이지 통합) */
 	@PostMapping("/join")
 	public String joinPOST(UserVO user) throws Exception {
@@ -144,13 +151,13 @@ public class UserController {
 	}
 
 	/* 로그인 페이지 이동 */
-	@GetMapping("/login-register")
+	@GetMapping("/login")
 	public void loginPageGET() {
 		logger.info("로그인 페이지 진입");
 	}
 
 	/* 로그인 */
-	@PostMapping("/login-register")
+	@PostMapping("/login")
 	public String loginPOST(HttpSession session, UserVO user, RedirectAttributes rttr) throws Exception {
 		logger.info("로그인  진입");
 		String rawPw = "";
@@ -175,12 +182,12 @@ public class UserController {
 			} else {
 				rttr.addFlashAttribute("result", 0);
 				System.out.println("로그인 오류");
-				return "redirect:/user/login-register"; // 로그인 페이지로 이동
+				return "redirect:/user/login"; // 로그인 페이지로 이동
 			}
 
 		} else { // 일지하는 아이디가 존재하지 않을 시 (로그인 실패)
 			rttr.addFlashAttribute("result", 0);
-			return "redirect:/user/login-register"; // 로그인 페이지로 이동
+			return "redirect:/user/login"; // 로그인 페이지로 이동
 		}
 
 	}
@@ -228,7 +235,7 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("errorMessage", "일치하는 사용자 정보가 없습니다.");
 		}
 
-		return "redirect:/user/login-register";
+		return "redirect:/user/login";
 	}
 
 	private void sendEmail(String to, String subject, String content) {
@@ -257,18 +264,17 @@ public class UserController {
 	}
 
 	/* Reverse Geocoder + NaverMaps API */
-    @PostMapping("/getAddress")
-    @ResponseBody
-    public String getAddressFromCoordinates(HttpSession session
-    										,@RequestParam("latitude") String latitude
-                                            ,@RequestParam("longitude") String longitude) {
-        
-    	String loginId = (String) session.getAttribute("loginId");
-        String combinedAddress = userService.getAddressFromCoordinates(loginId,latitude,longitude);
-        session.setAttribute("loginLocation", combinedAddress);
-        
-        return combinedAddress;
-    }
+	@PostMapping("/getAddress")
+	@ResponseBody
+	public String getAddressFromCoordinates(HttpSession session, @RequestParam("latitude") String latitude,
+			@RequestParam("longitude") String longitude) {
+
+		String loginId = (String) session.getAttribute("loginId");
+		String combinedAddress = userService.getAddressFromCoordinates(loginId, latitude, longitude);
+		session.setAttribute("loginLocation", combinedAddress);
+
+		return combinedAddress;
+	}
 
 	/* 메인페이지 로그아웃 */
 	@GetMapping("/logout")
