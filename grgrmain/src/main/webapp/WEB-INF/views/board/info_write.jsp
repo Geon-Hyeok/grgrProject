@@ -66,7 +66,7 @@
 	<c:set var="boardName" value="정보공유게시판" />
 	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/information.jpg); background-size: cover;">
 		<div class="container text-center">
-			<h1 class="page-title">Free</h1>
+			<h1 class="page-title">Info</h1>
 			<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
 		</div>
 		<!-- / container -->
@@ -217,6 +217,7 @@
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/tiles/footer.jsp" />
+	
 	<!-- core JavaScript -->
 	<script
 		src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>

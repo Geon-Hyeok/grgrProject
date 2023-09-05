@@ -76,7 +76,7 @@
 	<c:set var="boardName" value="정보공유게시판" />
 	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/information.jpg); background-size: cover;">
 		<div class="container text-center">
-			<h1 class="page-title">Free</h1>
+			<h1 class="page-title">Info</h1>
 			<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
 		</div>
 		<!-- / container -->
@@ -234,34 +234,8 @@
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
 	<!-- footer 영역 -->
-	<footer>
-		<div class="container">
-			<div class="row v-center mobile-center">
-				<div class="col-md-4 footer-left-area tablet-top">
-					<p>
-						© Soft UI by <a href="https://kingstudio.ro" target="_blank">KingStudio</a>
-					</p>
-				</div>
-				<!-- / footer-left-area -->
-				<div class="col-md-8 footer-right-area">
-					<p>
-						<a href="${pageContext.request.contextPath}/index.html"
-							class="text-link mr-15">Home</a> <a
-							href="${pageContext.request.contextPath}/components.html"
-							class="text-link mr-15">Components</a> <a
-							href="${pageContext.request.contextPath}/sections.html"
-							class="text-link mr-15">Sections</a> <a
-							href="${pageContext.request.contextPath}/templates.html"
-							class="text-link">Templates</a>
-					</p>
-				</div>
-				<!-- / footer-right-area -->
-			</div>
-			<!-- / row -->
-		</div>
-		<!-- / container -->
-	</footer>
-
+	<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>
+	
 	<!-- core JavaScript -->
 	<script
 		src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>

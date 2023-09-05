@@ -142,6 +142,7 @@
 	</section>
 	<!-- / pagination-center -->
 
+	<!-- 위로 스크롤 -->
 	<a href="#top" class="scroll-to-top is-hidden smooth-scroll"
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 

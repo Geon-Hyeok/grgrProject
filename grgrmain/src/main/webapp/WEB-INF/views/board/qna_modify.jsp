@@ -121,9 +121,9 @@
 	</section>
 	<!-- / pagination-center -->
 
+	<!-- 위로 스크롤 -->
 	<a href="#top" class="scroll-to-top is-hidden smooth-scroll"
-		data-nav-status="toggle"> <i class="fas fa-chevron-up"></i>
-	</a>
+		data-nav-status="toggle"> <i class="fas fa-chevron-up"></i></a>
 
 	<!-- footer 영역 -->
 	<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>

@@ -137,29 +137,7 @@
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
 	<!-- footer 영역 -->
-	<footer>
-		<div class="container">
-			<div class="row v-center mobile-center">
-				<div class="col-md-4 footer-left-area tablet-top">
-					<p>
-						© Soft UI by <a href="https://kingstudio.ro" target="_blank">KingStudio</a>
-					</p>
-				</div>
-				<!-- / footer-left-area -->
-				<div class="col-md-8 footer-right-area">
-					<p>
-						<a href="../index.html" class="text-link mr-15">Home</a> <a
-							href="../components.html" class="text-link mr-15">Components</a>
-						<a href="../sections.html" class="text-link mr-15">Sections</a> <a
-							href="../templates.html" class="text-link">Templates</a>
-					</p>
-				</div>
-				<!-- / footer-right-area -->
-			</div>
-			<!-- / row -->
-		</div>
-		<!-- / container -->
-	</footer>
+	<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>
 
 	<!-- core JavaScript -->
 	<script

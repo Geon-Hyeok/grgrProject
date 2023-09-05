@@ -49,7 +49,7 @@
 	<c:set var="boardName" value="판매게시판" />
 	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/market.jpg); background-size: cover;">
 		<div class="container text-center">
-			<h1 class="page-title">Free</h1>
+			<h1 class="page-title">Market</h1>
 				<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
 			<a href="#start" class="btn btn-sm btn-primary smooth-scroll">
 			<i class="fas fa-shopping-cart mr-5"></i> 
@@ -189,33 +189,8 @@
 	<a href="#top" class="scroll-to-top is-hidden smooth-scroll"
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
-	<footer>
-		<div class="container">
-			<div class="row v-center mobile-center">
-				<div class="col-md-4 footer-left-area tablet-top">
-					<p>
-						© Soft UI by <a href="https://kingstudio.ro" target="_blank">KingStudio</a>
-					</p>
-				</div>
-				<!-- / footer-left-area -->
-				<div class="col-md-8 footer-right-area">
-					<p>
-						<a href="${pageContext.request.contextPath}/index.html"
-							class="text-link mr-15">Home</a> <a
-							href="${pageContext.request.contextPath}/components.html"
-							class="text-link mr-15">Components</a> <a
-							href="${pageContext.request.contextPath}/sections.html"
-							class="text-link mr-15">Sections</a> <a
-							href="${pageContext.request.contextPath}/templates.html"
-							class="text-link">Templates</a>
-					</p>
-				</div>
-				<!-- / footer-right-area -->
-			</div>
-			<!-- / row -->
-		</div>
-		<!-- / container -->
-	</footer>
+	<!-- footer 영역 -->
+	<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>
 
 	<form id="moveForm" method="get">
 		<input type="hidden" name="keyword" value="${pager.cri.keyword}">

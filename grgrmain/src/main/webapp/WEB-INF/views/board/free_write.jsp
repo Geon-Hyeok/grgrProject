@@ -162,7 +162,7 @@
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
 	<!-- footer 영역 -->
-<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>
 
 	<!-- core JavaScript -->
 	<script
