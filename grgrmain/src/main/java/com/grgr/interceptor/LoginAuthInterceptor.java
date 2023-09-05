@@ -29,7 +29,7 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
 
 			// 로그인 페이지로 리다이렉트할 때, 원래의 URL을 쿼리 스트링으로 함께 보냅니다.
 			returnUrl=URLEncoder.encode(returnUrl, "utf-8");
-			response.sendRedirect(request.getContextPath()+ "/user/login-register"); //?returnUrl=\" + returnUrl
+			response.sendRedirect(request.getContextPath()+ "/user/login"); //?returnUrl=\" + returnUrl
 			
 			return false;
 		}
