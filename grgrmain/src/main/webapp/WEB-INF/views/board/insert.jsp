@@ -14,7 +14,7 @@
 	<c:set var="boardName" value="판매게시판" />
 	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/market.jpg); background-size: cover;">
 		<div class="container text-center">
-			<h1 class="page-title">Market</h1>
+			<h1 class="page-title">Free</h1>
 			<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
 		</div>
 		<!-- / container -->
@@ -45,8 +45,5 @@
 		</div>
 		<button class="btn">등록</button>
 	</form>
-	
-	<!-- footer 영역 -->
-	<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>
 </body>
 </html>

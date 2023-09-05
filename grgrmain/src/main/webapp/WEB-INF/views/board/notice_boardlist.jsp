@@ -222,8 +222,34 @@
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
 	<!-- footer 영역 -->
-	<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>
-	
+	<footer>
+		<div class="container">
+			<div class="row v-center mobile-center">
+				<div class="col-md-4 footer-left-area tablet-top">
+					<p>
+						© Soft UI by <a href="https://kingstudio.ro" target="_blank">KingStudio</a>
+					</p>
+				</div>
+				<!-- / footer-left-area -->
+				<div class="col-md-8 footer-right-area">
+					<p>
+						<a href="${pageContext.request.contextPath}/index.html"
+							class="text-link mr-15">Home</a> <a
+							href="${pageContext.request.contextPath}/components.html"
+							class="text-link mr-15">Components</a> <a
+							href="${pageContext.request.contextPath}/sections.html"
+							class="text-link mr-15">Sections</a> <a
+							href="${pageContext.request.contextPath}/templates.html"
+							class="text-link">Templates</a>
+					</p>
+				</div>
+				<!-- / footer-right-area -->
+			</div>
+			<!-- / row -->
+		</div>
+		<!-- / container -->
+	</footer>
+
 	<!-- core JavaScript -->
 	<script
 		src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
@@ -236,6 +262,13 @@
 	<!-- preloader -->
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
 	<!-- / preloader -->
+
+	<!-- smooth scroll -->
+	<script
+		src="${pageContext.request.contextPath}/assets/js/jquery.easing.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/smooth-scroll.js"></script>
+	<!-- / smooth scroll -->
 
 	<!-- hide nav -->
 	<script src="${pageContext.request.contextPath}/assets/js/hide-nav.js"></script>

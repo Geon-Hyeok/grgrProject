@@ -52,7 +52,7 @@
 	<c:set var="boardName" value="판매게시판" />
 	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/market.jpg); background-size: cover;">
 		<div class="container text-center">
-			<h1 class="page-title">Market</h1>
+			<h1 class="page-title">Free</h1>
 			<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
 		</div>
 		<!-- / container -->
@@ -337,6 +337,13 @@
 	<!-- preloader -->
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
 	<!-- / preloader -->
+
+	<!-- smooth scroll -->
+	<script
+		src="${pageContext.request.contextPath}/assets/js/jquery.easing.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/smooth-scroll.js"></script>
+	<!-- / smooth scroll -->
 
 	<!-- hide nav -->
 	<script src="${pageContext.request.contextPath}/assets/js/hide-nav.js"></script>
