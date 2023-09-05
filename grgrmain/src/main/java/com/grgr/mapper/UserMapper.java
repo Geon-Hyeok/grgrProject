@@ -60,5 +60,6 @@ public interface UserMapper {
 	UserVO findUserByIdAndEmail(String userId, String email);
     void updateUserPassword(UserVO user);
     
-    void updateUserLocation(@Param("userId") String userId, @Param("address") String address);
+    /* 사용자 접속 위치 정보 업데이트*/
+    void getAddressFromCoordinate(@Param("loginId") String loginId, @Param("address") String address);
 }

@@ -5,9 +5,11 @@
 	<!-- 회원가입 -->
 	<insert id="userJoin">
 		insert into USERINFO(UNO, USER_NAME, USER_ID,
-		USER_PW, NICKNAME, PHONE, EMAIL, BUSINESS_NO, user_status) values(UNO_SEQ.NEXTVAL,
+		USER_PW, NICKNAME, PHONE, EMAIL, BUSINESS_NO, user_status)
+		values(UNO_SEQ.NEXTVAL,
 		#{userName},#{userId}, #{userPw},
-		#{nickName}, #{phone}, #{email},
+		#{nickName},
+		#{phone}, #{email},
 		#{businessNo},2)
 	</insert>
 
@@ -26,13 +28,13 @@
 
 	<!-- 로그인 -->
 	<select id="userLogin" resultType="com.grgr.dto.UserVO">
-		 
+
 		select * from USERINFO where USER_ID = #{userId}
 	</select>
-	
-	
-	
-       <select id="getAllUsers" resultType="com.grgr.dto.UserVO">
+
+
+
+	<select id="getAllUsers" resultType="com.grgr.dto.UserVO">
     <![CDATA[
     SELECT *
     FROM (
@@ -46,53 +48,57 @@
     )
     WHERE rn >= #{startRow}
     ]]>
-</select>
-    
-    <select id="selectUserCount" resultType="int">
-		select count(*) from userinfo
 	</select>
-	
+
+	<select id="selectUserCount" resultType="int">
+		select count(*) from
+		userinfo
+	</select>
+
 	<!-- user-update 쿼리 -->
-    <update id="updateUser" parameterType="com.grgr.dto.UserVO">
-        UPDATE userinfo
-        SET user_name = #{userName},
-            nickname = #{nickName},
-            user_id = #{userId},
-            phone=#{phone},
-            email=#{email},
-            user_status=#{userStatus},
-            active=#{active},
-            point=#{point},
-            business_no=#{businessNo}
-        WHERE uno = #{uno}
-    </update>
-	
+	<update id="updateUser" parameterType="com.grgr.dto.UserVO">
+		UPDATE userinfo
+		SET user_name = #{userName},
+		nickname = #{nickName},
+		user_id = #{userId},
+		phone=#{phone},
+		email=#{email},
+		user_status=#{userStatus},
+		active=#{active},
+		point=#{point},
+		business_no=#{businessNo}
+		WHERE uno = #{uno}
+	</update>
+
 	<!-- 아이디 찾기 -->
-	 <select id="findUserIdByNameAndEmail"  resultType="java.lang.String">
-        SELECT user_id
-        FROM userinfo
-        WHERE user_name = #{name}
-        AND email = #{email}
-    </select>
-    
-    <!-- 비밀번호 찾기 -->
-    
-    
-    
-    <select id="findUserByIdAndEmail" parameterType="map" resultType="com.grgr.dto.UserVO">
-    SELECT * FROM userinfo
-    WHERE user_id = #{userId}
-    AND email = #{email}
-</select>
+	<select id="findUserIdByNameAndEmail"
+		resultType="java.lang.String">
+		SELECT user_id
+		FROM userinfo
+		WHERE user_name = #{name}
+		AND email = #{email}
+	</select>
 
-<!-- 사용자 비밀번호 업데이트 -->
-<update id="updateUserPassword" parameterType="com.grgr.dto.UserVO">
-    UPDATE userinfo
-    SET user_pw = #{userPw}
-    WHERE user_id = #{userId}
-</update>
+	<!-- 비밀번호 찾기 -->
 
-<!-- 회원 조회 -->
+
+
+	<select id="findUserByIdAndEmail" parameterType="map"
+		resultType="com.grgr.dto.UserVO">
+		SELECT * FROM userinfo
+		WHERE user_id = #{userId}
+		AND email = #{email}
+	</select>
+
+	<!-- 사용자 비밀번호 업데이트 -->
+	<update id="updateUserPassword"
+		parameterType="com.grgr.dto.UserVO">
+		UPDATE userinfo
+		SET user_pw = #{userPw}
+		WHERE user_id = #{userId}
+	</update>
+
+	<!-- 회원 조회 -->
 	<select id="userProfile" resultType="com.grgr.dto.UserVO">
 		select * from USERINFO where
 		UNO = #{uno}
@@ -321,12 +327,13 @@
 			</choose>
 		</trim>
 	</sql>
-	
-<!-- 위치 정보 업데이트 -->
-<update id="updateUserLocation" parameterType="com.grgr.dto.UserVO">
-    UPDATE userinfo
-    SET user_location = #{address}
-    WHERE user_id = #{userId}
-</update>
-    
+
+	<!-- 위치 정보 업데이트 -->
+	<update id="getAddressFromCoordinate"
+		parameterType="java.util.Map">
+		UPDATE userinfo
+		SET user_loc = #{address}
+		WHERE user_id = #{loginId}
+	</update>
+
 </mapper>
