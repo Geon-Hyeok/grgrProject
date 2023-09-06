@@ -317,7 +317,7 @@
 
 					<div class="widget text-left p-y-15">
 						<a
-							href="<c:url value='/mypage/updateUserProfile?uno=${user.uno}' />"
+							href="<c:url value='/mypage/updateUserProfile' />"
 							class="btn btn-primary btn-block"><i class="fas fa-user mr-5"></i>
 							<span>회원정보 수정</span></a>
 					</div>
