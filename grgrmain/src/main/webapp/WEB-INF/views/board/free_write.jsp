@@ -162,7 +162,7 @@
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
 	<!-- footer 영역 -->
-<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>
 
 	<!-- core JavaScript -->
 	<script
@@ -176,13 +176,6 @@
 	<!-- preloader -->
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
 	<!-- / preloader -->
-
-	<!-- smooth scroll -->
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.easing.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/smooth-scroll.js"></script>
-	<!-- / smooth scroll -->
 
 	<!-- hide nav -->
 	<script src="${pageContext.request.contextPath}/assets/js/hide-nav.js"></script>

@@ -65,7 +65,9 @@
 	<c:set var="boardName" value="정보공유게시판" />
 	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/information.jpg); background-size: cover;">
 		<div class="container text-center">
+
 			<h1 class="page-title">Information</h1>
+
 			<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
 		</div>
 		<!-- / container -->
@@ -252,7 +254,6 @@
 
 	<!-- footer 영역 -->
 	<jsp:include page="/WEB-INF/views/tiles/footer.jsp"/>
-	
 
 	<!-- core JavaScript -->
 	<script
@@ -266,13 +267,6 @@
 	<!-- preloader -->
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
 	<!-- / preloader -->
-
-	<!-- smooth scroll -->
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.easing.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/smooth-scroll.js"></script>
-	<!-- / smooth scroll -->
 
 	<!-- hide nav -->
 	<script src="${pageContext.request.contextPath}/assets/js/hide-nav.js"></script>

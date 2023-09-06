@@ -88,10 +88,10 @@
 			<!-- 키워드 -->
 			<ul class="list-inline text-center mb-30">
 				<li id="keyword-button"><a
-					href="<c:url value='/mypage/myBoardWriteList?uno=${user.uno}' />"
+					href="<c:url value='/mypage/myBoardWriteList?uno=${param.uno}' />"
 					class="btn btn-outline-primary m-y-10 mr-10">내가 쓴 글</a></li>
 				<li id="keyword-button"><a
-					href="<c:url value='/mypage/myCommentList?uno=${user.uno}' />"
+					href="<c:url value='/mypage/myCommentList?uno=${param.uno}' />"
 					class="btn btn-outline-primary m-y-10 mr-10">내가 쓴 댓글</a></li>
 			</ul>
 
