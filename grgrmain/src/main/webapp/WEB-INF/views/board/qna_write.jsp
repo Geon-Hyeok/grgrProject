@@ -149,16 +149,9 @@
 		src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
 	<!-- / core JavaScript -->
 
-	<!-- preloader -->
+	<!-- preloader --> 
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
 	<!-- / preloader -->
-
-	<!-- smooth scroll -->
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.easing.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/smooth-scroll.js"></script>
-	<!-- / smooth scroll -->
 
 	<!-- hide nav -->
 	<script src="${pageContext.request.contextPath}/assets/js/hide-nav.js"></script>

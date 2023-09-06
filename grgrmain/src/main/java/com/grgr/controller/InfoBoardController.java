@@ -22,10 +22,12 @@ import com.grgr.service.InfoBoardService;
 import com.grgr.util.SearchCondition;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/infoboard")
 @RequiredArgsConstructor
+@Slf4j
 public class InfoBoardController {
 	private final InfoBoardService infoBoardService;
 
@@ -108,8 +110,8 @@ public class InfoBoardController {
 	@RequestMapping("/remove")
 	public String infoBoardRemove(@RequestParam Integer infoBno, SearchCondition searchCondition, HttpSession session,
 			RedirectAttributes rattr) {
-		int loginUser =(int) session.getAttribute("loginUser");
-		infoBoardService.removeInfoBoard(infoBno, loginUser);
+		Integer loginUno =(Integer) session.getAttribute("loginUno");
+		infoBoardService.removeInfoBoard(infoBno, loginUno);
 		String redirectUri = "redirect:/infoboard/list"+searchCondition.getQueryString();
 		return redirectUri;
 	}
@@ -117,9 +119,9 @@ public class InfoBoardController {
 	//글 숨김
 	@GetMapping("/hide")
 	public String infoBoardBlind(@RequestParam Integer infoBno, SearchCondition searchCondition, HttpSession session ) {
-		int loginUser =(int) session.getAttribute("loginUser");
-		int loginUserStatus =(int) session.getAttribute("loginUserStatus");
-		infoBoardService.hideInfoBoard(infoBno,loginUser,loginUserStatus);
+		Integer loginUno =(Integer) session.getAttribute("loginUno");
+		Integer loginUserStatus =(Integer) session.getAttribute("loginUserStatus");
+		infoBoardService.hideInfoBoard(infoBno,loginUno,loginUserStatus);
 		
 		String redirectUri = "redirect:/infoboard/list"+searchCondition.getQueryString();
 		return redirectUri;

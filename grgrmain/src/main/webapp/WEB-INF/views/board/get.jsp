@@ -46,14 +46,17 @@
 </head>
 
 <body>
-<!-- 헤더 -->
+	<!-- 헤더 -->
 	<jsp:include page="/WEB-INF/views/tiles/header.jsp" />
 	<!-- 배너 -->
 	<c:set var="boardName" value="판매게시판" />
-	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/market.jpg); background-size: cover;">
+	<header class="xl bg-img bg-fixed"
+		style="background-image: url(/grgrmain/images/market.jpg); background-size: cover;">
 		<div class="container text-center">
-			<h1 class="page-title">Free</h1>
-			<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
+			<h1 class="page-title">Market</h1>
+			<p class="w-50 m-x-auto mb-30" style="color: white;">
+				<c:out value="${boardName}" />
+			</p>
 		</div>
 		<!-- / container -->
 	</header>
@@ -66,16 +69,16 @@
 
 	<div id="top"></div>
 	<!-- / top -->
-	
-		<div class="container relative z-index-1">
-			<h1 class="page-title text-left mb-15">상품 조회</h1>
-			<nav class="breadcrumb relative z-index-1 pt-10 pl-5">
-				<a class="breadcrumb-item" href="#x">Home</a> <a
-					class="breadcrumb-item" href="/board/list">Market</a> <span
-					class="breadcrumb-item active">Product</span>
-			</nav>
-		</div>
-		<!-- / container -->
+
+	<div class="container relative z-index-1">
+		<h1 class="page-title text-left mb-15">상품 조회</h1>
+		<nav class="breadcrumb relative z-index-1 pt-10 pl-5">
+			<a class="breadcrumb-item" href="#x">Home</a> <a
+				class="breadcrumb-item" href="/board/list">Market</a> <span
+				class="breadcrumb-item active">Product</span>
+		</nav>
+	</div>
+	<!-- / container -->
 
 	<section class="big page-section">
 		<div class="container">
@@ -296,34 +299,8 @@
 	<a href="#top" class="scroll-to-top is-hidden smooth-scroll"
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
-	<footer>
-		<div class="container">
-			<div class="row v-center mobile-center">
-				<div class="col-md-4 footer-left-area tablet-top">
-					<p>
-						© 끼리끼리 by <a href="https://kingstudio.ro" target="_blank">옹기종기</a>
-					</p>
-				</div>
-				<!-- / footer-left-area -->
-				<div class="col-md-8 footer-right-area">
-					<p>
-						<a href="${pageContext.request.contextPath}/index.html"
-							class="text-link mr-15">Home</a> <a
-							href="${pageContext.request.contextPath}/components.html"
-							class="text-link mr-15">Components</a> <a
-							href="${pageContext.request.contextPath}/sections.html"
-							class="text-link mr-15">Sections</a> <a
-							href="${pageContext.request.contextPath}/templates.html"
-							class="text-link">Templates</a>
-					</p>
-				</div>
-				<!-- / footer-right-area -->
-			</div>
-			<!-- / row -->
-		</div>
-		<!-- / container -->
-
-	</footer>
+	<!-- footer 영역 --> 
+	<jsp:include page="/WEB-INF/views/tiles/footer.jsp" />
 
 	<!-- core JavaScript -->
 	<script
@@ -337,13 +314,6 @@
 	<!-- preloader -->
 	<script src="${pageContext.request.contextPath}/assets/js/preloader.js"></script>
 	<!-- / preloader -->
-
-	<!-- smooth scroll -->
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.easing.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/smooth-scroll.js"></script>
-	<!-- / smooth scroll -->
 
 	<!-- hide nav -->
 	<script src="${pageContext.request.contextPath}/assets/js/hide-nav.js"></script>
