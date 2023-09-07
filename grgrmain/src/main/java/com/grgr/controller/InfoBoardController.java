@@ -110,11 +110,7 @@ public class InfoBoardController {
 	@RequestMapping("/remove")
 	public String infoBoardRemove(@RequestParam Integer infoBno, SearchCondition searchCondition, HttpSession session,
 			RedirectAttributes rattr) {
-<<<<<<< Updated upstream
 		Integer loginUno =(Integer) session.getAttribute("loginUno");
-=======
-		int loginUno =(int) session.getAttribute("loginUno");
->>>>>>> Stashed changes
 		infoBoardService.removeInfoBoard(infoBno, loginUno);
 		String redirectUri = "redirect:/infoboard/list"+searchCondition.getQueryString();
 		return redirectUri;
