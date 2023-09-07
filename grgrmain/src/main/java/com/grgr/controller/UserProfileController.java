@@ -56,10 +56,11 @@ public class UserProfileController {
 	
 	/* 회원 정보 수정 페이지 이동 */
 	@GetMapping("/updateUserProfile")
-	public void updateUserProfileGet(HttpSession session, Model model) {
+	public String updateUserProfileGet(HttpSession session, Model model) {
 		logger.info("회원 정보 수정 페이지 진입");
 		 Integer uno = (Integer) session.getAttribute("loginUno"); 
 		model.addAttribute("user", userService.userProfile(uno));
+		return "mypage/updateUserProfile";
 	}
 
 	/* 회원 정보 수정 */
