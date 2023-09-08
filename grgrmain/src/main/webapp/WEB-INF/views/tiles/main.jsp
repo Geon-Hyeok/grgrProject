@@ -77,7 +77,7 @@
 					</div>
 					<div class="col-md-2">
 						<div class="card-body text-center">
-							<a href="<c:url value="board/list"/>"> <img
+							<a href="<c:url value="productboard/list"/>"> <img
 								src="${pageContext.request.contextPath}/images/sale_logo.png"
 								alt="판매게시판"
 								style="height: 100px; width: 90px; padding-bottom: 20px;">

@@ -40,6 +40,17 @@
 <!-- 배너 이동 -->
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<style>
+.update-location-button {
+    background-color: #ffffff; 
+    color: #0074cc; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px;
+  }
+ </style>
 </head>
 <body>
 	<header class="xxl bg-img "
@@ -60,9 +71,9 @@
 					</ul>
 					<!-- / navbar-nav -->
 				</div>
-				<div class="input-group input-w-overlap-btn ml-20">
+				<div class="input-group input-w-overlap-btn ml-20" style="width:300px;">
 					<input type="text" class="form-control pill"
-						placeholder="검색어를 입력하세요."> <span class="input-group-btn">
+						placeholder="검색어를 입력하세요." style="width:300px;"> <span class="input-group-btn">
 						<button
 							class="btn btn-sm btn-icon btn-circle btn-primary overlapping-btn"
 							type="button">
@@ -88,9 +99,16 @@
 				</c:if>
 				<c:if test="${loginUno!=null && loginUserStatus!=1 }">
 
-
-					<span>${loginNickname}님, 환영합니다.</span>
-					<button onclick="updateLocation()">Update Location</button>
+				<div class="collapse navbar-collapse col-lg-3" id="navbar-toggle1">
+					<ul class="navbar-nav ml-30">
+						<li class="nav-item"><a class="nav-link" style="width:150px;">"${loginNickname }"&nbsp;님 <br> 환영합니다.</a></li>
+						<li class="nav-item ml-30"><a class="nav-link" href="">
+						<button class="update-location-button"onclick="updateLocation()">Update Location</button></a>
+						</li>
+					</ul>
+					<!-- / navbar-nav -->
+				</div>
+					
 					<ul class="navbar-button p-0 m-0 ml-80">
 						<li class="nav-item"><a
 							href="<c:url value="/mypage/userProfile"/>"
