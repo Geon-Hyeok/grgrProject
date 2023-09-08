@@ -90,10 +90,12 @@
 				<div class="col-lg-6 tablet-lg-top-30 page-content">
 					<div class="project-post">
 						<div class="page-content">
+							<div id="imagePreviewContainer" class="mb-10"></div>
 							<div id="product-carousel" class="owl-carousel owl-theme">
-								<c:forEach var="file" items="${productFile}">
+								<c:forEach var="file" items="${productFiles}">
+									<%-- <img src="${pageContext.request.contextPath}/resources/upload/${file.infoFileUpload}" --%>
 									<img src="<c:url value="/upload/${file.productFileUpload}"/>"
-										alt="${file.productFileOrigin }" width="10">
+										alt="${file.productFileOrigin }" width="200">
 								</c:forEach>
 							</div>
 							<!-- / owl-carousel -->
@@ -233,6 +235,170 @@
 															.submit(); // 폼을 제출
 												}
 											});
+							if (Modernizr.touch) {
+								// show the close overlay button
+								$('.close-overlay').removeClass('hidden');
+								// handle the adding of hover class when clicked
+								$('.img').click(function(e) {
+									if (!$(this).hasClass('hover')) {
+										$(this).addClass('hover');
+									}
+								});
+								// handle the closing of the overlay
+								$('.close-overlay').click(
+										function(e) {
+											e.preventDefault();
+											e.stopPropagation();
+											if ($(this).closest('.img')
+													.hasClass('hover')) {
+												$(this).closest('.img')
+														.removeClass('hover');
+											}
+										});
+							} else {
+								// handle the mouseenter functionality
+								$('.img').mouseenter(function() {
+									$(this).addClass('hover');
+								})
+								// handle the mouseleave functionality
+								.mouseleave(function() {
+									$(this).removeClass('hover');
+								});
+							}
+						});
+	</script>
+	<script>
+		var files;
+		document.getElementById('file-button').addEventListener(
+				'change',
+				function(event) {
+					files = event.target.files;
+					var previewContainer = document
+							.getElementById('imagePreviewContainer');
+					previewContainer.innerHTML = '';
+
+					for (var i = 0; i < files.length; i++) {
+						var file = files[i];
+						var reader = new FileReader();
+
+						reader.onload = (function(file) {
+							return function(e) {
+								var div = document.createElement('div');
+								div.style.display = 'inline-block';
+								div.style.marginRight = '10px';
+
+								var img = document.createElement('img');
+								img.src = e.target.result;
+								img.alt = "Image Preview";
+								img.width = 30;
+								div.appendChild(img);
+								previewContainer.appendChild(div);
+							};
+						})(file);
+
+						reader.readAsDataURL(file);
+					}
+				});
+	</script>
+
+	<script>
+		$(document)
+				.ready(
+						function() {
+
+							function isImageFile(file) {
+								const validImageTypes = [ 'image/gif',
+										'image/jpeg', 'image/png', 'image/jpg' ]; // 원하는 이미지 타입에 따라 확장 가능
+								return file
+										&& validImageTypes.includes(file.type);
+							}
+							document
+									.querySelector('#insert-submit')
+									.addEventListener(
+											'click',
+											function() {
+												var title = document
+														.getElementsByName('productTitle')[0].value;
+												var content = document
+														.getElementsByName('productContent')[0].value;
+
+												var contentErrorMessage = "";
+												var imgErrorMessage = "";
+
+												if (title.trim() === ''
+														|| content.trim() === '') {
+													console
+															.log('title trim 진입');
+													contentErrorMessage = '제목과 내용을 모두 입력해주세요.';
+													console
+															.log(contentErrorMessage);
+
+												}
+
+												if (files
+														&& files.length > 0
+														&& !Array
+																.from(files)
+																.every(
+																		isImageFile)) {
+													console.log('img trim 진입');
+													imgErrorMessage = '유효하지 않은 파일 형식입니다. 이미지 파일만 업로드 해주세요.';
+													console
+															.log('img error save');
+												}
+
+												if (contentErrorMessage !== "") {
+													console
+															.log('title error not null');
+
+													document
+															.getElementById('content-error-message').textContent = contentErrorMessage;
+
+													$('#content-error-message')
+															.show();
+													console
+															.log('title error show');
+
+													setTimeout(
+															function() {
+																$(
+																		'#content-error-message')
+																		.fadeOut(
+																				'slow');
+															}, 5000);
+												}
+
+												if (imgErrorMessage !== '') {
+													console
+															.log('img error not null');
+													document
+															.getElementById('img-error-message').textContent = imgErrorMessage;
+													$('#img-error-message')
+															.show();
+													console
+															.log('img error show');
+
+													setTimeout(
+															function() {
+																$(
+																		'#img-error-message')
+																		.fadeOut(
+																				'slow');
+															}, 5000);
+												}
+
+												if (contentErrorMessage === ""
+														&& imgErrorMessage === "") {
+													document.getElementById(
+															'form-validation')
+															.submit(); // 폼을 제출
+												}
+											});
+
+							setTimeout(function() {
+								$('#error-message').fadeOut('slow');
+							}, 5000);
+
 							if (Modernizr.touch) {
 								// show the close overlay button
 								$('.close-overlay').removeClass('hidden');

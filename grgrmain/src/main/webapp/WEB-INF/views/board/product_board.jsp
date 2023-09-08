@@ -73,8 +73,8 @@
 	<div class="container relative z-index-1">
 		<h1 class="page-title text-left mb-15">상품 조회</h1>
 		<nav class="breadcrumb relative z-index-1 pt-10 pl-5">
-			<a class="breadcrumb-item" href="#x">Home</a> <a
-				class="breadcrumb-item" href="/board/list">Market</a> <span
+			<a class="breadcrumb-item" href="/main">Home</a> <a
+				class="breadcrumb-item" href="/productboard/list">Market</a> <span
 				class="breadcrumb-item active">Product</span>
 		</nav>
 	</div>
@@ -87,13 +87,12 @@
 					<div class="project-post">
 						<div class="page-content">
 							<div id="product-carousel" class="owl-carousel owl-theme">
-								<img
-									src="${pageContext.request.contextPath}/assets/images/placeholder-square.jpg"
-									alt="" class="rounded-10"> <img
-									src="${pageContext.request.contextPath}/assets/images/placeholder-square.jpg"
-									alt="" class="rounded-10"> <img
-									src="${pageContext.request.contextPath}/assets/images/placeholder-square.jpg"
-									alt="" class="rounded-10">
+								<c:forEach var="file" items="${productFiles}">
+									<%-- <img src="${pageContext.request.contextPath}/resources/upload/${file.infoFileUpload}" --%>
+									<img src="<c:url value="/upload/${file.productFileUpload}"/>"
+										alt="${file.productFileOrigin }" class="board-images"
+										width="200">
+								</c:forEach>
 							</div>
 							<!-- / owl-carousel -->
 						</div>
@@ -104,54 +103,63 @@
 				<!-- / column -->
 
 				<div class="col-lg-6 sidebar">
-    <h3 class="mb-5">
-        <c:out value="${productBoard.productTitle}" />
-    </h3>
-    <p class="fs-20 mb-15">
-        ₩
-        <c:out value="${productBoard.productPrice}" />
-    </p>
-    <p class="lead m-y-40">
-        <c:out value="${productBoard.productContent}" />
-    </p>
-    <p class="ratings mb-0">
-        <i class="fas fa-star fs-16"></i> <i class="fas fa-star fs-16"></i>
-        <i class="fas fa-star fs-16"></i> <i class="fas fa-star fs-16"></i>
-        <i class="fas fa-star fs-16"></i> <span class="ml-5">(2 Reviews)</span>
-    </p>
+					<h3 class="mb-5">
+						<c:out value="${productBoard.productTitle}" />
+					</h3>
+					<p class="fs-20 mb-15">
+						₩
+						<c:out value="${productBoard.productPrice}" />
+					</p>
+					<p class="lead m-y-40">
+						<c:out value="${productBoard.productContent}" />
+					</p>
+					<p class="ratings mb-0">
+						<i class="fas fa-star fs-16"></i> <i class="fas fa-star fs-16"></i>
+						<i class="fas fa-star fs-16"></i> <i class="fas fa-star fs-16"></i>
+						<i class="fas fa-star fs-16"></i> <span class="ml-5">(2
+							Reviews)</span>
+					</p>
 
-    <div class="form-cart">
-        <div class="input-group input-w-overlap-btn mb-0 md-input-group sm-input">
-            <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="form-control qty mr-10 rounded">
-            <span class="input-group-btn">
-                <button class="btn btn-primary rounded" type="button">
-                    <i class="fas fa-shopping-cart mr-5"></i> <span>Buy Now</span>
-                </button>
-            </span>
-        </div>
-        <!-- / input-group -->
-    </div>
+					<div class="form-cart">
+						<div
+							class="input-group input-w-overlap-btn mb-0 md-input-group sm-input">
+							<input type="number" step="1" min="0" name="cart" value="1"
+								title="Qty" class="form-control qty mr-10 rounded"> <span
+								class="input-group-btn">
+								<button class="btn btn-primary rounded" type="button">
+									<i class="fas fa-shopping-cart mr-5"></i> <span>Buy Now</span>
+								</button>
+							</span>
+						</div>
+						<!-- / input-group -->
+					</div>
 
-    <c:if test="${productBoard.uno==sessionScope.loginUno}">
-        <!-- 수정버튼 제출시 제출된 게시글로 진입 + 자신의 게시글에서 글목록 누를시 원래보던 페이지로 이동할 것  -->
-        <a href="<c:url value='/productboard/modify${searchCondition.getQueryString()}&productId=${productBoard.productId}'/>" class="btn btn-xs btn-primary pill mt-3" style="font-size: 15px;"><span>수정</span></a>
-    </c:if>
+					<c:if test="${productBoard.uno==sessionScope.loginUno}">
+						<!-- 수정버튼 제출시 제출된 게시글로 진입 + 자신의 게시글에서 글목록 누를시 원래보던 페이지로 이동할 것  -->
+						<a
+							href="<c:url value='/productboard/modify${searchCondition.getQueryString()}&productId=${productBoard.productId}'/>"
+							class="btn btn-xs btn-primary pill mt-3" style="font-size: 15px;"><span>수정</span></a>
+					</c:if>
 
-    <c:if test="${productBoard.uno==sessionScope.loginUno}">
-        <!-- 자신의 글일시 해당 글번호의 글을 삭제할 수 있음 -->
-        <a href="<c:url value='/productboard/remove${searchCondition.getQueryString()}&productId=${productBoard.productId}'/>" class="btn btn-xs btn-primary pill mt-3" style="font-size: 15px;"><span>삭제</span></a>
-    </c:if>
+					<c:if test="${productBoard.uno==sessionScope.loginUno}">
+						<!-- 자신의 글일시 해당 글번호의 글을 삭제할 수 있음 -->
+						<a
+							href="<c:url value='/productboard/remove${searchCondition.getQueryString()}&productId=${productBoard.productId}'/>"
+							class="btn btn-xs btn-primary pill mt-3" style="font-size: 15px;"><span>삭제</span></a>
+					</c:if>
 
-    <c:if test="${sessionScope.loginUserStatus == 1 }">
-        <!-- 관리자는 해당 글번호의 글을 숨김처리할 수 있음 -->
-        <a href="<c:url value='/productboard/hide${searchCondition.getQueryString()}&productId=${productBoard.productId}'/>" class="btn btn-xs btn-primary pill mt-3" style="font-size: 15px;"><span>숨김</span></a>
-    </c:if>
-</div>
-				
+					<c:if test="${sessionScope.loginUserStatus == 1 }">
+						<!-- 관리자는 해당 글번호의 글을 숨김처리할 수 있음 -->
+						<a
+							href="<c:url value='/productboard/hide${searchCondition.getQueryString()}&productId=${productBoard.productId}'/>"
+							class="btn btn-xs btn-primary pill mt-3" style="font-size: 15px;"><span>숨김</span></a>
+					</c:if>
+				</div>
+
 				<!-- / column -->
 			</div>
 			<!-- / row -->
-			
+
 			<div class="card mt-30">
 				<div class="card-body">
 					<ul class="nav nav-tabs nav-pills" role="tablist">
@@ -310,7 +318,7 @@
 	<a href="#top" class="scroll-to-top is-hidden smooth-scroll"
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
-	<!-- footer 영역 --> 
+	<!-- footer 영역 -->
 	<jsp:include page="/WEB-INF/views/tiles/footer.jsp" />
 
 	<!-- core JavaScript -->
@@ -350,6 +358,38 @@
 			animateIn : 'fadeIn',
 			animateOut : 'fadeOut'
 		})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			if (Modernizr.touch) {
+				// show the close overlay button
+				$('.close-overlay').removeClass('hidden');
+				// handle the adding of hover class when clicked
+				$('.img').click(function(e) {
+					if (!$(this).hasClass('hover')) {
+						$(this).addClass('hover');
+					}
+				});
+				// handle the closing of the overlay
+				$('.close-overlay').click(function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					if ($(this).closest('.img').hasClass('hover')) {
+						$(this).closest('.img').removeClass('hover');
+					}
+				});
+			} else {
+				// handle the mouseenter functionality
+				$('.img').mouseenter(function() {
+					$(this).addClass('hover');
+				})
+				// handle the mouseleave functionality
+				.mouseleave(function() { // 추가된 부분
+					$(this).removeClass('hover');
+				}); // 추가된 부분
+			}
+		});
 	</script>
 	<!-- / Owl Carousel -->
 
