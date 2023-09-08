@@ -49,11 +49,14 @@
 	<!-- 헤더 -->
 	<jsp:include page="/WEB-INF/views/tiles/header.jsp" />
 	<!-- 배너 -->
-	<c:set var="boardName" value="자유게시판" />
-	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/free2.jpg); background-size: cover;">
+	<c:set var="boardName" value="판매" />
+	<header class="xl bg-img bg-fixed"
+		style="background-image: url(/grgrmain/images/free2.jpg); background-size: cover;">
 		<div class="container text-center">
-			<h1 class="page-title">Free</h1>
-			<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
+			<h1 class="page-title">Market</h1>
+			<p class="w-50 m-x-auto mb-30" style="color: white;">
+				<c:out value="${boardName}" />
+			</p>
 		</div>
 		<!-- / container -->
 	</header>
@@ -88,13 +91,10 @@
 					<div class="project-post">
 						<div class="page-content">
 							<div id="product-carousel" class="owl-carousel owl-theme">
-								<img
-									src="${pageContext.request.contextPath}/assets/images/placeholder-square.jpg"
-									alt="" class="rounded-10"> <img
-									src="${pageContext.request.contextPath}/assets/images/placeholder-square.jpg"
-									alt="" class="rounded-10"> <img
-									src="${pageContext.request.contextPath}/assets/images/placeholder-square.jpg"
-									alt="" class="rounded-10">
+								<c:forEach var="file" items="${productFile}">
+									<img src="<c:url value="/upload/${file.productFileUpload}"/>"
+										alt="${file.productFileOrigin }" width="10">
+								</c:forEach>
 							</div>
 							<!-- / owl-carousel -->
 						</div>
@@ -105,19 +105,24 @@
 				<!-- / column -->
 
 				<div class="col-lg-6 sidebar">
-					<form id="modifyForm" action="/board/modify" method="post">
+					<form action="modify" method="post" class="validation-inner"
+						id="form-validation" novalidate="novalidate">
 						<div class="row">
+							<input type="hidden" name="uno" value="${productBoard.uno}" /> <input
+								type="hidden" name="productId" value="${productBoard.productId}" />
+							<input type="hidden" name="productUpdateUno"
+								value="${sessionScope.loginUno}" />
 							<div class="col-md-12">
 								<div class="form-group">
 									제목 : <input type="text" class="form-control border-faded"
-										name="productTitle" value="${pageInfo.productTitle}"
+										name="productTitle" value="${productBoard.productTitle}"
 										placeholder="제목" style="font-weight: bold;">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									가격 : <input type="text" class="form-control border-faded"
-										name="productPrice" value="${pageInfo.productPrice}"
+										name="productPrice" value="${productBoard.productPrice}"
 										placeholder="가격" style="font-weight: bold;">
 								</div>
 							</div>
@@ -126,38 +131,46 @@
 									상품 설명 :
 									<textarea class="form-control border-faded"
 										name="productContent" placeholder="상품 설명"
-										style="height: 413px; font-weight: bold; resize: none;">${pageInfo.productContent}</textarea>
+										style="height: 413px; font-weight: bold; resize: none;">${productBoard.productContent}</textarea>
 								</div>
+
+							</div>
+							<div>
+								<input type="file" name="file" multiple="multiple"
+									accept="image/*" id="file-button" style="display: none;">
+								<div class="btn btn-instagram m-y-10 mr-10"
+									onclick="document.getElementById('file-button').click()">
+									<span class="mr-5"><i class="fab fa-instagram"></i></span> <span>사진업로드</span>
+									<%-- <span id="upload-error-message" style="color: red;">${message}</span></div> --%>
+								</div>
+
 							</div>
 						</div>
+
+						<div class="col-md-12">
+							<div style="text-align: left;">
+								<a
+									href="<c:url value='/productboard/list${searchCondition.getQueryString()}'/>">
+									<button type="button" class="btn btn-primary">수정취소</button>
+								</a>
+								<button type="button" id="modify-submit" class="btn btn-primary">수정</button>
+							</div>
+						</div>
+
 					</form>
-					<div class="col-md-12">
-						<input type="hidden" name="productId"
-							value="${pageInfo.productId}" />
-						<button type="submit" class="btn btn-primary" id="modifyButton">수정</button>
-						<form id="deleteForm" action="/board/delete" method="post">
-							<input type="hidden" name="productId"
-								value="${pageInfo.productId}" />
-							<button type="button" class="btn btn-danger" id="deleteButton">삭제</button>
-						</form>
-					</div>
+					<!-- / column -->
 				</div>
+				<!-- / row -->
 
-
-				<!-- / column -->
 			</div>
-			<!-- / row -->
-
-
-		</div>
-		<!-- / container -->
+			<!-- / container -->
 	</section>
 
 
 	<a href="#top" class="scroll-to-top is-hidden smooth-scroll"
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
-	<!-- footer 영역 --> 
+	<!-- footer 영역 -->
 	<jsp:include page="/WEB-INF/views/tiles/footer.jsp" />
 
 	<!-- core JavaScript -->
@@ -188,36 +201,69 @@
 	<script
 		src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
 	<script>
-		$('#product-carousel').owlCarousel({
-			loop : true,
-			margin : 0,
-			nav : false,
-			dots : true,
-			items : 1,
-			animateIn : 'fadeIn',
-			animateOut : 'fadeOut'
-		})
+		$(document)
+				.ready(
+						function() {
 
-		// 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
-		let mForm = $("#modifyForm"); // 페이지 데이터 수정 from
-		let dForm = $("deleteForm");
-		/* 수정 하기 버튼 */
-		$("#modifyButton").on("click", function(e) {
-			mForm.submit();
-		});
+							document
+									.querySelector('#modify-submit')
+									.addEventListener(
+											'click',
+											function() {
+												var productBoardUno = "${productBoard.uno}";
+												var loginUno = "${sessionScope.loginUno}";
 
-		$(document).ready(function() {
-			// 삭제 버튼 클릭 시
-			$("#deleteButton").on("click", function(e) {
-				e.preventDefault(); // 기본 동작 막기
+												//권한이 없는 사용자가 get방식으로 페이지를 요청하여 수정하는것 방지
+												if (productBoardUno !== loginUno) {
+													window.location.href = "<c:url value="/404"/>";
+													return;
+												}
 
-				// 삭제 확인 다이얼로그 표시
-				if (confirm("정말로 삭제하시겠습니까?")) {
-					// 삭제 폼을 서버로 전송
-					$("#deleteForm").submit();
-				}
-			});
-		});
+												var title = document
+														.getElementsByName('productTitle')[0].value;
+												var content = document
+														.getElementsByName('productContent')[0].value;
+
+												if (title.trim() === ''
+														|| content.trim() === '') {
+													alert('제목과 내용을 모두 입력해주세요.');
+												} else {
+													document.getElementById(
+															'form-validation')
+															.submit(); // 폼을 제출
+												}
+											});
+							if (Modernizr.touch) {
+								// show the close overlay button
+								$('.close-overlay').removeClass('hidden');
+								// handle the adding of hover class when clicked
+								$('.img').click(function(e) {
+									if (!$(this).hasClass('hover')) {
+										$(this).addClass('hover');
+									}
+								});
+								// handle the closing of the overlay
+								$('.close-overlay').click(
+										function(e) {
+											e.preventDefault();
+											e.stopPropagation();
+											if ($(this).closest('.img')
+													.hasClass('hover')) {
+												$(this).closest('.img')
+														.removeClass('hover');
+											}
+										});
+							} else {
+								// handle the mouseenter functionality
+								$('.img').mouseenter(function() {
+									$(this).addClass('hover');
+								})
+								// handle the mouseleave functionality
+								.mouseleave(function() {
+									$(this).removeClass('hover');
+								});
+							}
+						});
 	</script>
 	<!-- / Owl Carousel -->
 
