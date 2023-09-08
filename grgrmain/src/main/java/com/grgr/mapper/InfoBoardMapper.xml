@@ -77,6 +77,7 @@
 		and info_blindstate = 1
 	</update>
 
+
 	<!-- n번 게시글 -->
 	<select id="selectInfoBoard" resultType="InfoBoard">
 		SELECT
