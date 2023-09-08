@@ -66,7 +66,8 @@
 		user_status=#{userStatus},
 		active=#{active},
 		point=#{point},
-		business_no=#{businessNo}
+		business_no=#{businessNo},
+		user_update_uno=7
 		WHERE uno = #{uno}
 	</update>
 
@@ -110,8 +111,7 @@
 		#{email}, USER_PW = #{userPw}, BUSINESS_NO = #{businessNo},
 		USER_UPDATE_UNO = #{uno},
 		USER_UPDATE = sysdate
-		where UNO =
-		#{uno}
+		where UNO =#{uno}
 	</update>
 
 	<delete id="deleteUserProfile">
