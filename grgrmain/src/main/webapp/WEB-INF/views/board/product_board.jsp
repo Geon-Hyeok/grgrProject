@@ -71,7 +71,7 @@
 	<!-- / top -->
 
 	<div class="container relative z-index-1">
-		<h1 class="page-title text-left mb-15">상품 조회</h1>
+		<h1 class="page-title text-left mb-15">상품 조회ㅁㄴㅇㄹ</h1>
 		<nav class="breadcrumb relative z-index-1 pt-10 pl-5">
 			<a class="breadcrumb-item" href="#x">Home</a> <a
 				class="breadcrumb-item" href="/board/list">Market</a> <span
