@@ -177,12 +177,13 @@
 
 
 	<!-- 신고수 증가 -->
-	<!-- <update id="increaseInfoReportNo">
+	<update id="increaseInfoReportNo">
 		UPDATE info_board
 		SET
-		info_report_no = info_report_no + 1
+		info_report_no = info_report_no +
+		1
 		WHERE info_bno = #{infoBno}
-	</update> -->
+	</update>
 
 	<!-- 이미지파일 업로드 : INFO_FILE_UPDATE_UNO 는 로그인 기능 완성시 추가할 것 -->
 	<insert id="insertInfoFile">
