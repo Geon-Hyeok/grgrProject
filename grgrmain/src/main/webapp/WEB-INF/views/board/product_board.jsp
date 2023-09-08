@@ -104,43 +104,54 @@
 				<!-- / column -->
 
 				<div class="col-lg-6 sidebar">
-					<h3 class="mb-5">
-						<c:out value="${pageInfo.productTitle}" />
-					</h3>
-					<p class="fs-20 mb-15">
-						₩
-						<c:out value="${pageInfo.productPrice}" />
-					</p>
-					<p class="lead m-y-40">
-						<c:out value="${pageInfo.productContent}" />
-					</p>
-					<p class="ratings mb-0">
-						<i class="fas fa-star fs-16"></i> <i class="fas fa-star fs-16"></i>
-						<i class="fas fa-star fs-16"></i> <i class="fas fa-star fs-16"></i>
-						<i class="fas fa-star fs-16"></i> <span class="ml-5">(2
-							Reviews)</span>
-					</p>
-					<!-- / input-group -->
+    <h3 class="mb-5">
+        <c:out value="${productBoard.productTitle}" />
+    </h3>
+    <p class="fs-20 mb-15">
+        ₩
+        <c:out value="${productBoard.productPrice}" />
+    </p>
+    <p class="lead m-y-40">
+        <c:out value="${productBoard.productContent}" />
+    </p>
+    <p class="ratings mb-0">
+        <i class="fas fa-star fs-16"></i> <i class="fas fa-star fs-16"></i>
+        <i class="fas fa-star fs-16"></i> <i class="fas fa-star fs-16"></i>
+        <i class="fas fa-star fs-16"></i> <span class="ml-5">(2 Reviews)</span>
+    </p>
 
-					<div class="form-cart">
-						<div
-							class="input-group input-w-overlap-btn mb-0 md-input-group sm-input">
-							<input type="number" step="1" min="0" name="cart" value="1"
-								title="Qty" class="form-control qty mr-10 rounded"> <span
-								class="input-group-btn">
-								<button class="btn btn-primary rounded" type="button">
-									<i class="fas fa-shopping-cart mr-5"></i> <span>Buy Now</span>
-								</button>
-							</span>
-						</div>
-						<!-- / input-group -->
-					</div>
-					<!-- / form-cart -->
-				</div>
+    <div class="form-cart">
+        <div class="input-group input-w-overlap-btn mb-0 md-input-group sm-input">
+            <input type="number" step="1" min="0" name="cart" value="1" title="Qty" class="form-control qty mr-10 rounded">
+            <span class="input-group-btn">
+                <button class="btn btn-primary rounded" type="button">
+                    <i class="fas fa-shopping-cart mr-5"></i> <span>Buy Now</span>
+                </button>
+            </span>
+        </div>
+        <!-- / input-group -->
+    </div>
+
+    <c:if test="${productBoard.uno==sessionScope.loginUno}">
+        <!-- 수정버튼 제출시 제출된 게시글로 진입 + 자신의 게시글에서 글목록 누를시 원래보던 페이지로 이동할 것  -->
+        <a href="<c:url value='/productboard/modify${searchCondition.getQueryString()}&productId=${productBoard.productId}'/>" class="btn btn-xs btn-primary pill mt-3" style="font-size: 15px;"><span>수정</span></a>
+    </c:if>
+
+    <c:if test="${productBoard.uno==sessionScope.loginUno}">
+        <!-- 자신의 글일시 해당 글번호의 글을 삭제할 수 있음 -->
+        <a href="<c:url value='/productboard/remove${searchCondition.getQueryString()}&productId=${productBoard.productId}'/>" class="btn btn-xs btn-primary pill mt-3" style="font-size: 15px;"><span>삭제</span></a>
+    </c:if>
+
+    <c:if test="${sessionScope.loginUserStatus == 1 }">
+        <!-- 관리자는 해당 글번호의 글을 숨김처리할 수 있음 -->
+        <a href="<c:url value='/productboard/hide${searchCondition.getQueryString()}&productId=${productBoard.productId}'/>" class="btn btn-xs btn-primary pill mt-3" style="font-size: 15px;"><span>숨김</span></a>
+    </c:if>
+</div>
+				
 				<!-- / column -->
 			</div>
 			<!-- / row -->
-
+			
 			<div class="card mt-30">
 				<div class="card-body">
 					<ul class="nav nav-tabs nav-pills" role="tablist">

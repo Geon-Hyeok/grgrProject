@@ -53,6 +53,7 @@
 		<interceptor>
 			<!--  <mapping path="/user/**"/>  -->
 			<mapping path="/infoboard/**"/>
+			<mapping path="/productboard/**"/>
 			<mapping path="/board/**"/>
 			<!-- <exclude-mapping path="/user/login-register"/> -->
 			<beans:ref bean="loginAuthInterceptor"/>
