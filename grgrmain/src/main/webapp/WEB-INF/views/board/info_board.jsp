@@ -66,6 +66,21 @@
 .comment {
 	border-top: 1px solid #97989d;
 }
+
+#like-button img {
+	width: 30px;
+	height: auto;
+}
+
+#like-button span{
+	text-align: center;
+}
+
+#like-button {
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* 내용을 세로로 중앙 정렬 */
+}
 </style>
 </head>
 
@@ -74,10 +89,13 @@
 	<jsp:include page="/WEB-INF/views/tiles/header.jsp" />
 	<!-- 배너 -->
 	<c:set var="boardName" value="정보공유게시판" />
-	<header class="xl bg-img bg-fixed" style="background-image: url(/grgrmain/images/information.jpg); background-size: cover;">
+	<header class="xl bg-img bg-fixed"
+		style="background-image: url(/grgrmain/images/information.jpg); background-size: cover;">
 		<div class="container text-center">
 			<h1 class="page-title">Info</h1>
-			<p class="w-50 m-x-auto mb-30" style="color: white;"><c:out value="${boardName}" /></p>
+			<p class="w-50 m-x-auto mb-30" style="color: white;">
+				<c:out value="${boardName}" />
+			</p>
 		</div>
 		<!-- / container -->
 	</header>
@@ -100,7 +118,7 @@
 						class="d-inline title-color primary-hover fs-24 fw-bold mb-15"
 						style="margin: 10px">${infoBoard.infoTitle} </a>
 					<%-- 세션!! <c:if test="${infoBoard.uno== }"> --%>
-					
+
 					<c:if test="${infoBoard.uno==sessionScope.loginUno}">
 						<!-- 수정버튼 제출시 제출된 게시글로 진입 + 자신의 게시글에서 글목록 누를시 원래보던 페이지로 이동할 것  -->
 						<a
@@ -141,13 +159,16 @@
 							<c:otherwise>이벤트</c:otherwise>
 						</c:choose>
 					</p>
-
+					<!-- 본문 영역 -->
 					<p class="m-y-30">${infoBoard.infoContent}</p>
+
+					<!-- 이미지 표시 영역 -->
 					<c:forEach var="file" items="${infoFiles}">
 						<%-- <img src="${pageContext.request.contextPath}/resources/upload/${file.infoFileUpload}" --%>
 						<img src="<c:url value="/upload/${file.infoFileUpload}"/>"
 							alt="${file.infoFileOrigin }" class="board-images" width="200">
 					</c:forEach>
+
 					<!-- 보던페이지로 이동 -->
 					<a
 						href="<c:url value='/infoboard/list${searchCondition.getQueryString()}' />"
@@ -158,7 +179,8 @@
 
 				<!-- 이전글, 다음글 -->
 				<nav aria-label="pager" style="clear: both; padding-top: 30px">
-					<ul class="pager">
+					<ul class="pager"
+						style="display: flex; justify-content: space-between;">
 						<c:if test="${!isFirstPost }">
 							<li class="pager-left"><a
 								href="<c:url value='/infoboard/read${searchCondition.getQueryString()}&infoBno=${prevInfoBno}'/>"><i
@@ -168,6 +190,8 @@
 							<li class="pager-left disabled"><i class="fas fa-arrow-left"></i>
 								<span class="ml-5">이전글</span></li>
 						</c:if>
+						<!-- 좋아요 버튼 -->
+						<li><span id="like-button"> <img> <span></span></span></li>
 
 						<c:if test="${!isLastPost}">
 							<li class="pager-right"><a
@@ -233,7 +257,7 @@
 	<a href="#top" class="scroll-to-top is-hidden smooth-scroll"
 		data-nav-status="toggle"><i class="fas fa-chevron-up"></i></a>
 
-	<!-- footer 영역 --> 
+	<!-- footer 영역 -->
 	<jsp:include page="/WEB-INF/views/tiles/footer.jsp" />
 
 	<!-- core JavaScript -->
@@ -429,11 +453,34 @@
 		    $("#comment-reply").val("");
 		}
 		
+		//좋아요 상태 check
+		function checkLikedStatus(infoBno){
+			console.log("infoBno:"+infoBno)
+			$.ajax({
+				type : 'GET', 
+				url : "<c:url value="/infolike/status"/>/"+ infoBno, // infoBno 값을 경로에 포함시킵니다.
+				success : function(data) {
+					
+					if(data.isLiked){
+						 $("#like-button img").attr("src", "<c:url value='/images/heart_full.png'/>");
+					}else {
+		                $("#like-button img").attr("src", "<c:url value='/images/heart.png'/>");
+		            }
+					 $("#like-button span").text(data.likeCnt);
+				},
+				error : function(err) {
+					
+					console.error("좋아요 상태 파악에 실패하였습니다.", err);
+				}
+			});
+		}
 		
+		//페이지 로드시 실행될 것들
 		$(document).ready(function() {
 
 			$("#comment-reply").hide(); //대댓글 폼을 일단 숨김
-		    showList(infoBno, pageNum);
+			checkLikedStatus(infoBno); //좋아요 여부 표시
+		    showList(infoBno, pageNum); //댓글 list 출력
 		    
 
 		<!-- 대댓글 폼 --> */
@@ -559,8 +606,34 @@
 		            }
 		        });
 		    });
+		    
+		    // 좋아요 버튼 클릭
+		    $("#like-button").click(function(){
+		    	$.ajax({
+		    		type: 'post',
+		    		url: "<c:url value="/infolike/toggle"/>/"+infoBno,
+		    		success: function(data){
+		    			if(data.isLiked){
+							 $("#like-button img").attr("src", "<c:url value='/images/heart_full.png'/>");
+							 
+						} else {
+			                $("#like-button img").attr("src", "<c:url value='/images/heart.png'/>");
+			            }
+		    			
+		    			 $("#like-button span").text(data.likeCnt);
+		    		},
+		    		error: function(err) {
+		                console.error("좋아요버튼 오류입니다.", err);
+		            }
+		    		
+		    	});
+		    	
+		    });
 
 		});
+		
+		
+		
 	</script>
 
 	<script>
